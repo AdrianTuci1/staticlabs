@@ -1,0 +1,44 @@
+.app-shell {
+  --frame-inset: 1rem;
+  position: relative;
+  isolation: isolate;
+  height: 100dvh;
+  overflow: hidden;
+  padding: 1.25rem;
+}
+
+.app-shell::before {
+  position: fixed;
+  inset: var(--frame-inset);
+  z-index: -2;
+  border: 1px solid rgba(100, 220, 255, 0.22);
+  box-shadow: 0 0 0 100vmax #080909;
+  pointer-events: none;
+  content: "";
+}
+
+.screen-noise {
+  position: fixed;
+  inset: var(--frame-inset);
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    radial-gradient(circle at 0 0, rgba(100, 220, 255, 0.16) 0 1px, transparent 1.5px),
+    linear-gradient(rgba(100, 220, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(100, 220, 255, 0.04) 1px, transparent 1px);
+  background-size: 2.6rem 2.6rem;
+  mask-image: linear-gradient(to bottom, transparent, black 10%, black 82%, transparent);
+}
+
+main {
+  height: 100%;
+  width: min(100%, 92rem);
+  margin: 0 auto;
+}
+
+@media (max-width: 640px) {
+  .app-shell {
+    --frame-inset: 0.45rem;
+    padding: 0.7rem;
+  }
+}

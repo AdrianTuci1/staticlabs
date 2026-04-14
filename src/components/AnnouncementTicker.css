@@ -1,0 +1,38 @@
+.announcement-ticker {
+  justify-self: end;
+  width: min(100%, 43rem);
+  min-width: 0;
+  overflow: hidden;
+  color: var(--cyan);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-shadow: 0.08rem 0 rgba(255, 91, 88, 0.62);
+  white-space: nowrap;
+}
+
+.announcement-ticker__track {
+  display: flex;
+  width: max-content;
+  animation: announcement-scroll 18s linear infinite;
+}
+
+.announcement-ticker__track span {
+  flex: 0 0 auto;
+  padding-right: 3rem;
+}
+
+@keyframes announcement-scroll {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (max-width: 640px) {
+  .announcement-ticker {
+    justify-self: start;
+    width: 100%;
+    letter-spacing: 0.08em;
+  }
+}

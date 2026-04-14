@@ -1,0 +1,255 @@
+.loading-menu {
+  position: relative;
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  height: 100%;
+  padding: 1rem;
+  text-align: center;
+  overflow: hidden;
+}
+
+.loading-menu::before {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  content: "";
+  background: linear-gradient(to bottom,
+      transparent 0%,
+      rgba(100, 220, 255, 0.025) 18%,
+      rgba(100, 220, 255, 0.12) 48%,
+      rgba(100, 220, 255, 0.05) 78%,
+      transparent 100%);
+  mix-blend-mode: screen;
+  opacity: 0;
+  transform: translateY(-120%);
+  animation: loading-screen-sweep 3.6s ease-in-out 0.35s forwards;
+}
+
+.loading-menu>* {
+  position: relative;
+  z-index: 2;
+}
+
+.loading-menu>.hud-kicker {
+  margin-bottom: 1.35rem;
+}
+
+.loading-menu__kicker {
+  display: flex;
+  justify-content: center;
+  width: min(100%, 36rem);
+  max-width: 100%;
+  min-height: 1.2em;
+}
+
+.loading-menu__kicker-text {
+  position: relative;
+  display: inline-block;
+  white-space: nowrap;
+  clip-path: inset(0 100% 0 0);
+  animation:
+    loading-typewriter 1.15s steps(32, end) both,
+    loading-text-release 1ms linear 1.24s forwards;
+}
+
+.loading-menu__kicker-text::after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 1px;
+  content: "";
+  background: var(--cyan);
+  animation: loading-caret 620ms step-end 2 forwards;
+}
+
+.loading-menu .lab-mark {
+  opacity: 0;
+  border-image-slice: 1;
+  animation:
+    loading-item-arrive 420ms ease-out 1.22s both,
+    loading-logo-gradient 3.6s ease-in-out 0.35s forwards;
+}
+
+.loading-menu .lab-mark__logo,
+.loading-menu .lab-mark__text {
+  transition: none;
+}
+
+.loading-menu .lab-mark__logo {
+  animation: loading-logo-glyph-gradient 3.6s ease-in-out 0.35s forwards;
+}
+
+.loading-menu .lab-mark__text {
+  animation: loading-logo-text-gradient 3.6s ease-in-out 0.35s forwards;
+}
+
+.loading-menu__console {
+  display: grid;
+  justify-items: center;
+  width: min(100%, 42rem);
+  margin-top: 1.65rem;
+  opacity: 0;
+  animation: loading-item-arrive 420ms ease-out 1.48s both;
+}
+
+.loading-menu__console p {
+  margin: 0;
+  color: var(--ink);
+  font-size: 0.95rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-shadow: 0.08rem 0 rgba(100, 220, 255, 0.7);
+}
+
+@media (max-width: 980px) {
+  .loading-menu__console p {
+    font-size: 0.86rem;
+  }
+}
+
+.loading-menu__bar {
+  width: min(100%, 39rem);
+  height: 2.15rem;
+  margin: 1.45rem 0 0;
+  padding: 0.42rem;
+  border: 1px solid var(--cyan);
+  background: rgba(0, 0, 0, 0.26);
+}
+
+.loading-menu__bar span {
+  display: block;
+  width: 0;
+  height: 100%;
+  background: linear-gradient(90deg, var(--yellow), var(--red), var(--cyan));
+  animation: load-archive 2.55s cubic-bezier(0.16, 1, 0.3, 1) 1.48s forwards;
+}
+
+@media (max-width: 640px) {
+  .loading-menu__console {
+    margin-top: 0;
+  }
+}
+
+@keyframes load-archive {
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes loading-typewriter {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes loading-text-release {
+  to {
+    clip-path: none;
+  }
+}
+
+@keyframes loading-caret {
+  50% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes loading-item-arrive {
+  from {
+    opacity: 0;
+    transform: translateY(0.45rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes loading-screen-sweep {
+
+  0%,
+  14% {
+    opacity: 0;
+    transform: translateY(-120%);
+  }
+
+  32% {
+    opacity: 0.65;
+  }
+
+  86% {
+    opacity: 0.16;
+    transform: translateY(120%);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(120%);
+  }
+}
+
+@keyframes loading-logo-gradient {
+
+  0%,
+  29% {
+    border-color: var(--cyan);
+    border-image-source: none;
+    color: var(--ink);
+    background: rgba(6, 16, 14, 0.56);
+    box-shadow: inset 0 0 18px rgba(100, 220, 255, 0.12), var(--shadow-cyan);
+  }
+
+  40%,
+  100% {
+    border-color: transparent;
+    border-image-source: var(--mission-gradient);
+    color: #fff;
+    background: rgba(6, 16, 14, 0.56);
+    box-shadow: 0 0 24px rgba(255, 255, 255, 0.2), inset 0 0 18px rgba(255, 255, 255, 0.14);
+  }
+}
+
+@keyframes loading-logo-glyph-gradient {
+
+  0%,
+  29% {
+    background: var(--ink);
+  }
+
+  40%,
+  100% {
+    background: var(--mission-gradient);
+  }
+}
+
+@keyframes loading-logo-text-gradient {
+
+  0%,
+  29% {
+    color: var(--ink);
+    background: none;
+    text-shadow: none;
+  }
+
+  40%,
+  100% {
+    color: transparent;
+    background: var(--mission-gradient);
+    background-clip: text;
+    -webkit-background-clip: text;
+    text-shadow: none;
+  }
+}

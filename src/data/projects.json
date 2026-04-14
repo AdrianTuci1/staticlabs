@@ -1,0 +1,113 @@
+[
+  {
+    "id": "001",
+    "code": "BO",
+    "title": "Thunder",
+    "status": "active",
+    "accent": "blue",
+    "image": "/static-labs-signal.svg",
+    "description": "Ultra-fast diffusion language model built for instant answers, sharp reasoning, and low-latency product workflows.",
+    "menus": [
+      {
+        "id": "visualize",
+        "label": "visualize",
+        "type": "visualizer",
+        "component": "ThunderVisualizer",
+        "shortText": "Thunder visualizer will be mounted here."
+      },
+      {
+        "id": "presentation",
+        "label": "presentation",
+        "type": "mermaid",
+        "mermaid": "Thunder is built around a simple promise: answers should arrive almost instantly without feeling shallow.\n\nThe work started from a product problem rather than a benchmark slogan. In a normal assistant flow, the user asks something direct, waits for the first useful sentence, then decides whether the system deserves the next question. If that first answer arrives late, the thread loses momentum. If it arrives quickly but feels thin, the speed is not useful. Thunder is designed around the space between those two failures.\n\nThe prototype treats latency as part of the interface. It keeps the response surface minimal, removes decorative visualization from the core interaction, and focuses on a clean loop: prompt, answer, structured evidence, and repeatable output. The goal is not to make the model look dramatic. The goal is to make it feel ready before attention drifts.\n\nWhat changed during the build was the role of the visualizer. Instead of asking the page to perform intelligence through effects, the project now lets the model response carry the experience. Tables, compact code windows, summaries, and short reasoning blocks make the output easier to scan. That gives the demo a stronger product read: people can understand the answer, compare it with the next run, and see whether the system remains consistent under similar prompts.\n\nThe most useful signal is time to first useful answer. Raw speed matters, but it only matters when the first sentence gives the user something they can act on. The second signal is formatting discipline: CSV-style tables, small code examples, and concise sections should appear without the answer becoming noisy. The third signal is repeatability. A fast model is more valuable when repeated prompts produce stable structure and dependable conclusions.\n\nThis approach benefits product teams because it brings quality, formatting, and perceived speed into the same surface. A demo can show what the user feels, not just what a chart claims. A research review can compare answers across runs without rebuilding the presentation every time. A product workflow can keep moving because the system answers in a way that is fast, legible, and easy to reuse.\n\nThe next stage is to turn the presentation into a clearer evaluation path. We should track how quickly the first useful sentence appears, how often the answer keeps the requested format, and how much the final response changes across repeated runs. Thunder should make these measurements visible without making the interface heavier.\n\nIn short, Thunder is not only about making answers faster. It is about preserving the moment when the user still has the question in their head, then meeting that moment with enough structure, confidence, and restraint to keep the work moving."
+      },
+      {
+        "id": "feedback",
+        "label": "feedback",
+        "type": "chat",
+        "messages": [
+          { "from": "lab", "text": "Thunder should feel immediate without losing answer quality." },
+          { "from": "visitor", "text": "Show latency, quality, and reliability in the presentation view." }
+        ]
+      },
+      {
+        "id": "timeline",
+        "label": "timeline",
+        "type": "timeline",
+        "shortText": "Thunder timeline placeholder."
+      }
+    ]
+  },
+  {
+    "id": "002",
+    "code": "SE",
+    "title": "Statsparrot",
+    "status": "calibrating",
+    "accent": "red",
+    "image": "/static-labs-signal.svg",
+    "description": "Sports intelligence workspace for tracking signals, comparing model reads, and turning match data into faster decisions.",
+    "menus": [
+      {
+        "id": "visualize",
+        "label": "visualize",
+        "type": "visualizer",
+        "component": "ParrotProject",
+        "shortText": "Statsparrot visualizer will render signal maps and confidence bands here."
+      },
+      {
+        "id": "presentation",
+        "label": "presentation",
+        "type": "mermaid",
+        "mermaid": "Statsparrot turns match data into a clearer reading surface.\n\nThe presentation should focus on how fast the system compares incoming signals, how visible confidence changes are, and how easy it is to move from raw data to a decision.\n\nThe strongest result is not just prediction quality, but the way the workspace makes uncertainty legible."
+      },
+      {
+        "id": "feedback",
+        "label": "feedback",
+        "type": "chat",
+        "messages": [
+          { "from": "lab", "text": "Current drift looks readable." },
+          { "from": "visitor", "text": "Add confidence bands near the summary." }
+        ]
+      },
+      {
+        "id": "timeline",
+        "label": "timeline",
+        "type": "timeline",
+        "shortText": "Statsparrot development timeline."
+      }
+    ]
+  },
+  {
+    "id": "003",
+    "code": "PA",
+    "title": "Pixtooth",
+    "status": "draft",
+    "accent": "yellow",
+    "image": "/static-labs-signal.svg",
+    "description": "Image prompt and asset system for exploring visual variants, organizing prompt runs, and shipping cleaner creative states.",
+    "menus": [
+      {
+        "id": "visualize",
+        "label": "visualize",
+        "type": "visualizer",
+        "component": "PixtoothVisualizer",
+        "shortText": "Pixtooth visualizer will render prompt tiles and asset states here."
+      },
+      {
+        "id": "presentation",
+        "label": "presentation",
+        "type": "mermaid",
+        "mermaid": "Pixtooth organizes visual exploration into a cleaner creative loop.\n\nThe system should make prompt runs easier to compare, preserve useful asset states, and keep the path from brief to output visible.\n\nThe presentation should emphasize speed, variant clarity, and fewer lost decisions between prompt iterations."
+      },
+      {
+        "id": "feedback",
+        "label": "feedback",
+        "type": "chat",
+        "messages": [
+          { "from": "lab", "text": "Pixtooth should feel fast, tactile, precise." },
+          { "from": "visitor", "text": "Keep the taxonomy visible while browsing." }
+        ]
+      }
+    ]
+  }
+]

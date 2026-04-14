@@ -1,0 +1,28 @@
+:root {
+  color-scheme: dark;
+  --bg: #111313;
+  --bg-2: #181a1a;
+  --ink: #f3f7ef;
+  --muted: #9da3a3;
+  --cyan: #64dcff;
+  --cyan-soft: rgba(100, 220, 255, 0.22);
+  --red: #ff5b58;
+  --yellow: #ffd25d;
+  --green: #7dffb2;
+  --line: rgba(100, 220, 255, 0.42);
+  --line-soft: rgba(243, 247, 239, 0.12);
+  --panel: rgba(18, 20, 20, 0.84);
+  --panel-hot: rgba(255, 91, 88, 0.12);
+  --shadow-cyan: 0 0 18px rgba(100, 220, 255, 0.24);
+  --mission-gradient: linear-gradient(
+    45deg,
+    #ffff00 0%,
+    #ff7f00 25%,
+    #ff0000 50%,
+    #8f00ff 75%,
+    #0000ff 100%
+  );
+  font-family: "IBM Plex Mono", "Roboto Mono", "Courier New", monospace;
+  font-synthesis: none;
+  text-rendering: geometricPrecision;
+}

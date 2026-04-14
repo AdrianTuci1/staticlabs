@@ -1,0 +1,148 @@
+.parrot-project {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  color: #f7f7f8;
+  background: #090a0b;
+  overflow: hidden;
+}
+
+.parrot-project--visualize {
+  display: block;
+}
+
+.parrot-project--presentation,
+.parrot-project--timeline {
+  display: grid;
+  place-items: center;
+  padding: 1.25rem;
+}
+
+.parrot-project__presentation-shell,
+.parrot-project__timeline-shell {
+  width: min(100%, 54rem);
+}
+
+.parrot-project__eyebrow {
+  margin: 0 0 1rem;
+  color: #a7adb4;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.parrot-project__presentation-shell h3,
+.parrot-project__timeline-shell h3 {
+  max-width: 42rem;
+  margin: 0 0 1rem;
+  color: #ffffff;
+  font-size: 2.05rem;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.05;
+}
+
+.parrot-project__presentation-shell p,
+.parrot-project__timeline-shell p {
+  max-width: 46rem;
+  margin: 0;
+  color: #d7dce2;
+  font-size: 1rem;
+  line-height: 1.65;
+}
+
+.parrot-project__article {
+  display: grid;
+  gap: 1.15rem;
+  max-width: 48rem;
+  margin-top: 1.9rem;
+  padding-top: 1.35rem;
+  border-top: 1px solid #331a1a;
+}
+
+.parrot-project__article-section {
+  display: grid;
+  grid-template-columns: minmax(9rem, 0.34fr) minmax(0, 1fr);
+  gap: 1.2rem;
+  padding-bottom: 1.15rem;
+  border-bottom: 1px solid #2a1515;
+}
+
+.parrot-project__article-section h4 {
+  margin: 0;
+  color: #ff4d4d;
+  font-size: 0.95rem;
+  font-weight: 800;
+  letter-spacing: 0;
+}
+
+.parrot-project__article-section p {
+  margin: 0;
+  color: #d7dce2;
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+/* Specific styling for the MindMap container within Statsparrot */
+.parrot-project__visualizer-container {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 50%, #150a0a 0%, #090a0b 100%);
+}
+
+.parrot-project__visualizer-container::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+}
+
+.parrot-project__hero-widgets {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  animation: parrot-phase-fade-in 600ms ease both;
+}
+
+.parrot-project__hero-widgets .hero-collage {
+  --hero-collage-scale: 0.58;
+  --hero-collage-shift-x: 0px;
+  --hero-collage-shift-y: 0px;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem 1rem 1rem;
+}
+
+
+@keyframes parrot-phase-fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+
+@media (max-width: 920px) {
+  .parrot-project {
+    min-height: 18rem;
+  }
+
+  .parrot-project__article-section {
+    grid-template-columns: 1fr;
+    gap: 0.55rem;
+  }
+
+  .parrot-project__presentation-shell h3,
+  .parrot-project__timeline-shell h3 {
+    font-size: 1.45rem;
+  }
+}

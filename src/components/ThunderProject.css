@@ -1,0 +1,419 @@
+.thunder-project {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  padding: 1.25rem;
+  color: #f7f7f8;
+  background: #070808;
+  overflow: hidden;
+  pointer-events: none;
+  user-select: none;
+}
+
+.thunder-project--presentation,
+.thunder-project--timeline {
+  place-items: center;
+}
+
+.thunder-project__presentation-shell,
+.thunder-project__timeline-shell {
+  width: min(100%, 54rem);
+}
+
+.thunder-project__eyebrow {
+  margin: 0 0 1rem;
+  color: #a7adb4;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.thunder-project__presentation-shell h3,
+.thunder-project__timeline-shell h3 {
+  max-width: 42rem;
+  margin: 0 0 1rem;
+  color: #ffffff;
+  font-size: 2.05rem;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.05;
+}
+
+.thunder-project__lede,
+.thunder-project__timeline-shell p {
+  max-width: 46rem;
+  margin: 0;
+  color: #d7dce2;
+  font-size: 1rem;
+  line-height: 1.65;
+}
+
+.thunder-project__article {
+  display: grid;
+  gap: 1.15rem;
+  max-width: 48rem;
+  margin-top: 1.9rem;
+  padding-top: 1.35rem;
+  border-top: 1px solid #2f3437;
+}
+
+.thunder-project__article-section {
+  display: grid;
+  grid-template-columns: minmax(9rem, 0.34fr) minmax(0, 1fr);
+  gap: 1.2rem;
+  padding-bottom: 1.15rem;
+  border-bottom: 1px solid #24282c;
+}
+
+.thunder-project__article-section h4 {
+  margin: 0;
+  color: #ffffff;
+  font-size: 0.95rem;
+  font-weight: 800;
+  letter-spacing: 0;
+}
+
+.thunder-project__article-section p {
+  margin: 0;
+  color: #d7dce2;
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.thunder-project__timeline-shell {
+  padding: 1.2rem;
+  border: 1px dashed #33383d;
+  border-radius: 8px;
+  background: #050505;
+}
+
+.thunder-project__messages {
+  display: grid;
+  min-height: 0;
+  overflow: auto;
+  scrollbar-color: #3f4448 transparent;
+  scrollbar-width: thin;
+}
+
+.thunder-project__messages-inner {
+  display: grid;
+  align-content: start;
+  gap: 1.25rem;
+  width: min(100%, 52rem);
+  margin-inline: auto;
+  padding-bottom: 1.15rem;
+}
+
+.thunder-project__exchange {
+  display: grid;
+  gap: 1.05rem;
+}
+
+.thunder-project__message {
+  display: grid;
+  gap: 0.65rem;
+  width: min(100%, 42rem);
+  margin: 0;
+  color: #f7f7f8;
+  font-size: 0.94rem;
+  line-height: 1.55;
+}
+
+.thunder-project__message--user {
+  justify-self: end;
+  width: min(100%, 34rem);
+  padding: 0.9rem 1rem;
+  border: 1px solid #2f3437;
+  border-radius: 8px;
+  color: #ffffff;
+  background: #050505;
+  animation: thunder-project-send 260ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.thunder-project__message--assistant {
+  justify-self: start;
+}
+
+.thunder-project__message p {
+  margin: 0;
+}
+
+.thunder-project__role {
+  color: #a7adb4;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+.thunder-project__caret {
+  display: inline-block;
+  width: 1px;
+  height: 1em;
+  margin-left: 2px;
+  background: #ffffff;
+  vertical-align: -0.16em;
+  animation: thunder-project-caret 680ms step-end infinite;
+}
+
+.thunder-project__csv {
+  display: grid;
+  border: 1px solid #33383d;
+  border-radius: 8px;
+  background: #0b0d0e;
+  overflow: hidden;
+}
+
+.thunder-project__csv-row {
+  display: grid;
+  grid-template-columns: 1.1fr 0.85fr 1.45fr;
+}
+
+.thunder-project__csv-row+.thunder-project__csv-row {
+  border-top: 1px solid #24282c;
+}
+
+.thunder-project__csv-row:first-child {
+  color: #d7dce2;
+  background: #15181b;
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+
+.thunder-project__csv-row span {
+  min-width: 0;
+  padding: 0.62rem 0.7rem;
+  border-right: 1px solid #24282c;
+  overflow-wrap: anywhere;
+}
+
+.thunder-project__csv-row span:last-child {
+  border-right: 0;
+}
+
+.thunder-project__code {
+  margin: 0;
+  border: 1px solid #33383d;
+  border-radius: 8px;
+  background: #050505;
+  overflow: hidden;
+}
+
+.thunder-project__code figcaption {
+  min-height: 2.2rem;
+  padding: 0.62rem 0.8rem;
+  border-bottom: 1px solid #24282c;
+  color: #cdd3da;
+  font-size: 0.72rem;
+}
+
+.thunder-project__code pre {
+  margin: 0;
+  padding: 0.9rem;
+  overflow: auto;
+  color: #ffffff;
+  font: inherit;
+  font-size: 0.82rem;
+  line-height: 1.55;
+  white-space: pre;
+}
+
+.thunder-project__composer-wrap {
+  display: grid;
+  width: min(100%, 52rem);
+  margin: 0 auto;
+}
+
+.thunder-project__composer-wrap.is-centered {
+  grid-row: 1 / -1;
+  align-self: center;
+  justify-self: center;
+  width: min(100%, 38rem);
+  gap: 1rem;
+}
+
+.thunder-project__brand {
+  display: inline-grid;
+  grid-template-columns: auto auto;
+  gap: 0.65rem;
+  align-items: center;
+  justify-self: start;
+  color: #f7f7f8;
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.thunder-project__brand-glyph {
+  width: 1.05rem;
+  height: 1.05rem;
+}
+
+.thunder-project__brand-glyph .lab-mark__logo {
+  background: #f7f7f8;
+}
+
+
+.thunder-project__composer {
+  position: relative;
+  display: grid;
+  gap: 0.85rem;
+  min-height: 4.95rem;
+  padding: 0.85rem;
+  border: 1px solid #2f3437;
+  border-radius: 8px;
+  color: #ffffff;
+  background: #050505;
+  font-size: 0.9rem;
+  line-height: 1.45;
+  box-shadow: none;
+}
+
+.thunder-project__composer-wrap.is-centered .thunder-project__composer {
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.26);
+}
+
+.thunder-project__prompt {
+  display: block;
+  padding-right: 3.1rem;
+}
+
+.thunder-project__prompt>span {
+  display: block;
+  min-width: 0;
+  padding: 0.2rem 0 0 0.25rem;
+  overflow-wrap: anywhere;
+}
+
+.thunder-project__send {
+  position: absolute;
+  right: 0.85rem;
+  bottom: 0.72rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.2rem;
+  min-width: 2.2rem;
+  aspect-ratio: 1;
+  padding: 0;
+  border: 1px solid #3a4046;
+  border-radius: 8px;
+  color: #050505;
+  background: #ffffff;
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0;
+  transform: translateY(0);
+  transition: background 160ms ease, color 160ms ease, transform 160ms ease, box-shadow 160ms ease;
+}
+
+.thunder-project__composer.is-sending .thunder-project__send {
+  color: #ffffff;
+  background: #2f7cff;
+  border-color: #5f9dff;
+  box-shadow: 0 0 18px rgba(47, 124, 255, 0.46);
+  transform: translateY(-0.12rem);
+}
+
+.thunder-project__composer.is-sending .thunder-project__prompt>span {
+  color: #d7dce2;
+}
+
+.thunder-project__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem 0.55rem;
+  align-items: center;
+  min-width: 0;
+  padding: 0 6.15rem 0.05rem 0.25rem;
+  color: #a7adb4;
+  font-size: 0.72rem;
+  line-height: 1.2;
+}
+
+.thunder-project__icon-button,
+.thunder-project__reasoning,
+.thunder-project__model {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  white-space: nowrap;
+}
+
+.thunder-project__icon-button,
+.thunder-project__reasoning {
+  min-height: 1.7rem;
+  border: 1px solid #2f3437;
+  border-radius: 8px;
+  background: #0b0d0e;
+}
+
+.thunder-project__icon-button {
+  width: 1.85rem;
+}
+
+.thunder-project__reasoning {
+  gap: 0.34rem;
+  padding: 0 0.55rem;
+  color: #d7dce2;
+}
+
+.thunder-project__model {
+  position: absolute;
+  right: 3.55rem;
+  bottom: 1.15rem;
+  color: #a7adb4;
+}
+
+@keyframes thunder-project-caret {
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes thunder-project-send {
+  from {
+    opacity: 0;
+    transform: translateY(3.2rem) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (max-width: 920px) {
+  .thunder-project {
+    min-height: 18rem;
+    padding: 0.85rem;
+  }
+
+  .thunder-project__csv-row {
+    grid-template-columns: 1fr;
+  }
+
+  .thunder-project__csv-row span {
+    border-right: 0;
+  }
+
+  .thunder-project__csv-row span+span {
+    border-top: 1px solid #24282c;
+  }
+
+  .thunder-project__article-section {
+    grid-template-columns: 1fr;
+    gap: 0.55rem;
+  }
+
+  .thunder-project__presentation-shell h3,
+  .thunder-project__timeline-shell h3 {
+    font-size: 1.45rem;
+  }
+}
