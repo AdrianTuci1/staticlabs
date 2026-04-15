@@ -14,7 +14,7 @@
   justify-content: center;
   min-height: 3rem;
   padding: 0.85rem 1.25rem;
-  border: 1px solid var(--cyan);
+  border: var(--lab-mark-border-width, 1px) solid var(--cyan);
   border-radius: 4px;
   color: var(--cyan);
   background: rgba(100, 220, 255, 0.04);
@@ -32,6 +32,47 @@
   outline: none;
 }
 
+.hud-button--glitch {
+  --glitch-theme: var(--project-theme, var(--cyan));
+  --glitch-bg: linear-gradient(45deg,
+      #ffff00 0%,
+      #ff7f00 25%,
+      #ff0000 50%,
+      #8f00ff 75%,
+      #0000ff 100%);
+  position: relative;
+  overflow: hidden;
+  border-color: var(--glitch-theme);
+  color: var(--glitch-theme);
+  background: color-mix(in srgb, var(--glitch-theme) 8%, transparent);
+  transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+.hud-button--glitch::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--glitch-bg);
+  z-index: -1;
+  opacity: 0;
+  transform: translate(var(--slide-start-x, 0), var(--slide-start-y, 0));
+  transition: transform 0s, opacity 0s;
+}
+
+.hud-button--glitch:hover::before {
+  opacity: 1;
+  transform: translate(0, 0);
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease;
+}
+
+.hud-button--glitch:hover,
+.hud-button--glitch:focus-visible {
+  color: #fff !important;
+  border-color: rgba(255, 255, 255, 0.7) !important;
+  background: transparent !important;
+  box-shadow: 0 0 24px rgba(255, 255, 255, 0.2);
+}
+
 .hud-button--filled {
   border-color: var(--yellow);
   color: var(--bg);
@@ -41,12 +82,12 @@
 .lab-mark {
   display: inline-grid;
   grid-template-columns: auto auto;
-  gap: 0.75rem;
+  gap: var(--lab-mark-gap, 0.55rem);
   align-items: center;
   min-width: 0;
-  padding: 0.64rem 1.1rem 0.64rem 0.64rem;
-  border: 1px solid var(--cyan);
-  border-radius: 12px;
+  padding: var(--lab-mark-padding, 0.64rem 1.1rem 0.64rem 0.64rem);
+  border: var(--lab-mark-border-width, 1px) solid var(--cyan);
+  border-radius: var(--lab-mark-radius, 12px);
   color: var(--ink);
   background: rgba(6, 16, 14, 0.56);
   box-shadow: inset 0 0 18px rgba(100, 220, 255, 0.12), var(--shadow-cyan);
@@ -56,57 +97,35 @@ button.lab-mark {
   cursor: pointer;
 }
 
-.lab-mark--large {
-  padding: 0.85rem 1.2rem;
-  border-width: 4px;
-  border-radius: 8px;
-}
-
-.lab-mark__glyph {
-  display: flex;
+.hud-sound {
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
-  width: 1.3rem;
-  height: 1.3rem;
-  flex-shrink: 0;
-}
-
-.lab-mark--large .lab-mark__glyph {
-  width: 4rem;
-  height: 4rem;
-}
-
-.lab-mark__logo {
-  display: block;
-  width: 100%;
-  height: 100%;
-  background: var(--mission-gradient);
-  -webkit-mask-image: url('/logofill.svg');
-  mask-image: url('/logofill.svg');
-  -webkit-mask-size: contain;
-  mask-size: contain;
-  -webkit-mask-repeat: no-repeat;
-  mask-repeat: no-repeat;
-  -webkit-mask-position: center;
-  mask-position: center;
-}
-
-.lab-mark__text {
-  display: grid;
-  gap: 0.02rem;
-  justify-items: start;
-  color: var(--ink);
-  font-size: 0.76rem;
-  font-weight: 700;
-  line-height: 0.86;
-  text-align: left;
+  gap: 0.35rem;
+  padding: 0.35rem 0.65rem;
+  border: none;
+  background: transparent;
+  color: var(--project-theme, var(--cyan));
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  text-shadow: none;
+  cursor: pointer;
+  transition: all 0.22s ease;
 }
 
-.lab-mark--large .lab-mark__text {
-  font-size: 2.55rem;
-  text-transform: uppercase;
+.hud-sound:hover {
+  color: #fff;
+  text-shadow: 0 0 12px color-mix(in srgb, var(--project-theme, var(--cyan)) 45%, transparent);
+}
+
+.hud-sound__dot {
+  display: inline-block;
+  width: 3px;
+  height: 3px;
+  background: currentColor;
+  border-radius: 50%;
+  opacity: 0.8;
+  margin-top: 1px; /* Visual centering adjustment */
 }
 
 @media (max-width: 640px) {
@@ -116,7 +135,4 @@ button.lab-mark {
     letter-spacing: 0.08em;
   }
 
-  .lab-mark--large .lab-mark__text {
-    font-size: 1.62rem;
-  }
 }

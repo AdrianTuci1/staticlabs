@@ -24,7 +24,7 @@
   mix-blend-mode: screen;
   opacity: 0;
   transform: translateY(-120%);
-  animation: loading-screen-sweep 3.6s ease-in-out 0.35s forwards;
+  animation: loading-screen-sweep 5.2s ease-in-out 0.35s forwards;
 }
 
 .loading-menu>* {
@@ -67,10 +67,29 @@
 
 .loading-menu .lab-mark {
   opacity: 0;
-  border-image-slice: 1;
-  animation:
-    loading-item-arrive 420ms ease-out 1.22s both,
-    loading-logo-gradient 3.6s ease-in-out 0.35s forwards;
+  position: relative;
+  border: var(--lab-mark-border-width) solid transparent;
+  background: transparent;
+  box-shadow: none;
+  overflow: hidden;
+  animation: loading-item-arrive 420ms ease-out 1.22s both;
+}
+
+.loading-menu .lab-mark::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: var(--lab-mark-border-width);
+  border-radius: inherit;
+  background-image: var(--mission-gradient), linear-gradient(#fff, #fff);
+  background-repeat: no-repeat;
+  background-position: top, top;
+  background-size: 100% 0%, 100% 100%;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  animation: loading-logo-fill-reveal 5.2s ease-in-out 0.35s forwards;
 }
 
 .loading-menu .lab-mark__logo,
@@ -79,11 +98,23 @@
 }
 
 .loading-menu .lab-mark__logo {
-  animation: loading-logo-glyph-gradient 3.6s ease-in-out 0.35s forwards;
+  background-image: var(--mission-gradient), linear-gradient(#fff, #fff);
+  background-repeat: no-repeat;
+  background-position: top, top;
+  background-size: 100% 0%, 100% 100%;
+  animation: loading-logo-fill-reveal 5.2s ease-in-out 0.35s forwards;
 }
 
 .loading-menu .lab-mark__text {
-  animation: loading-logo-text-gradient 3.6s ease-in-out 0.35s forwards;
+  color: transparent;
+  background-image: var(--mission-gradient), linear-gradient(#fff, #fff);
+  background-repeat: no-repeat;
+  background-position: top, top;
+  background-size: 100% 0%, 100% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  animation: loading-logo-fill-reveal 5.2s ease-in-out 0.35s forwards;
+  text-shadow: none;
 }
 
 .loading-menu__console {
@@ -112,20 +143,42 @@
 }
 
 .loading-menu__bar {
+  position: relative;
   width: min(100%, 39rem);
-  height: 2.15rem;
+  height: 2.85rem;
   margin: 1.45rem 0 0;
   padding: 0.42rem;
   border: 1px solid var(--cyan);
   background: rgba(0, 0, 0, 0.26);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: bar-collapse 4.32s cubic-bezier(0.16, 1, 0.3, 1) 1.48s forwards;
+  transform-origin: center;
 }
 
 .loading-menu__bar span {
-  display: block;
+  position: absolute;
+  left: 0.42rem;
+  top: 0.42rem;
+  bottom: 0.42rem;
   width: 0;
-  height: 100%;
   background: linear-gradient(90deg, var(--yellow), var(--red), var(--cyan));
-  animation: load-archive 2.55s cubic-bezier(0.16, 1, 0.3, 1) 1.48s forwards;
+  animation: load-archive 4.32s cubic-bezier(0.16, 1, 0.3, 1) 1.48s forwards;
+}
+
+.loading-menu__bar-text {
+  position: relative;
+  z-index: 10;
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 950;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  text-shadow: 0 0 1px #fff, 0 0 0.5px rgba(255, 255, 255, 0.5);
+  opacity: 0;
+  pointer-events: none;
+  animation: accessing-files-fade 4.32s linear 1.48s forwards;
 }
 
 @media (max-width: 640px) {
@@ -135,8 +188,68 @@
 }
 
 @keyframes load-archive {
-  to {
-    width: 100%;
+  0% {
+    width: 0;
+  }
+
+  75% {
+    width: calc(100% - 0.84rem);
+  }
+
+  100% {
+    width: calc(100% - 0.84rem);
+  }
+}
+
+@keyframes bar-collapse {
+
+  0%,
+  80% {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scaleX(0);
+    opacity: 0;
+  }
+}
+
+@keyframes accessing-files-fade {
+
+  0%,
+  35% {
+    opacity: 0;
+    transform: translateY(2px);
+  }
+
+  50%,
+  70% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  78% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+}
+
+@keyframes loading-logo-fill-reveal {
+
+  0%,
+  29% {
+    background-size: 100% 0%, 100% 100%;
+  }
+
+  40%,
+  100% {
+    background-size: 100% 100%, 100% 100%;
   }
 }
 
@@ -198,58 +311,5 @@
   100% {
     opacity: 0;
     transform: translateY(120%);
-  }
-}
-
-@keyframes loading-logo-gradient {
-
-  0%,
-  29% {
-    border-color: var(--cyan);
-    border-image-source: none;
-    color: var(--ink);
-    background: rgba(6, 16, 14, 0.56);
-    box-shadow: inset 0 0 18px rgba(100, 220, 255, 0.12), var(--shadow-cyan);
-  }
-
-  40%,
-  100% {
-    border-color: transparent;
-    border-image-source: var(--mission-gradient);
-    color: #fff;
-    background: rgba(6, 16, 14, 0.56);
-    box-shadow: 0 0 24px rgba(255, 255, 255, 0.2), inset 0 0 18px rgba(255, 255, 255, 0.14);
-  }
-}
-
-@keyframes loading-logo-glyph-gradient {
-
-  0%,
-  29% {
-    background: var(--ink);
-  }
-
-  40%,
-  100% {
-    background: var(--mission-gradient);
-  }
-}
-
-@keyframes loading-logo-text-gradient {
-
-  0%,
-  29% {
-    color: var(--ink);
-    background: none;
-    text-shadow: none;
-  }
-
-  40%,
-  100% {
-    color: transparent;
-    background: var(--mission-gradient);
-    background-clip: text;
-    -webkit-background-clip: text;
-    text-shadow: none;
   }
 }

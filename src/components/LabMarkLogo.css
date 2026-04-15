@@ -1,0 +1,99 @@
+@import url('https://fonts.googleapis.com/css2?family=Goldman:wght@700&family=Orbitron:wght@900&family=Silkscreen:wght@700&display=swap');
+
+.lab-mark {
+  --lab-mark-font-orbitron: "Orbitron", "IBM Plex Mono", "Roboto Mono", "Courier New", monospace;
+  --lab-mark-font-silkscreen: "Silkscreen", "IBM Plex Mono", "Roboto Mono", "Courier New", monospace;
+  --lab-mark-font-goldman: "Goldman", "IBM Plex Mono", "Roboto Mono", "Courier New", monospace;
+  --lab-mark-font-family: var(--lab-mark-font-orbitron);
+  --lab-mark-font-weight: 900;
+  --lab-mark-logo-size-base: 1.3rem;
+  --lab-mark-logo-size-m: 2.67rem;
+  --lab-mark-logo-size-l: 4.35rem;
+  --lab-mark-radius-base: 12px;
+  --lab-mark-radius-m: 12px;
+  --lab-mark-radius-l: 18px;
+  --lab-mark-border-width-base: 1px;
+  --lab-mark-border-width-m: 3px;
+  --lab-mark-border-width-l: 5px;
+  --lab-mark-padding-base: 0.64rem 1.1rem 0.64rem 0.64rem;
+  --lab-mark-padding-m: 0.32rem;
+  --lab-mark-padding-l: 0.42rem 0.58rem 0.42rem 0.42rem;
+  --lab-mark-gap-base: 0.55rem;
+  --lab-mark-gap-m: 0.48rem;
+  --lab-mark-gap-l: 0.6rem;
+  --lab-mark-text-size-base: 0.76rem;
+  --lab-mark-text-size-m: 1.35rem;
+  --lab-mark-text-size-l: 2.55rem;
+  --lab-mark-logo-size: var(--lab-mark-logo-size-base);
+  --lab-mark-radius: var(--lab-mark-radius-base);
+  --lab-mark-border-width: var(--lab-mark-border-width-base);
+  --lab-mark-padding: var(--lab-mark-padding-base);
+  --lab-mark-gap: var(--lab-mark-gap-base);
+  --lab-mark-text-size: var(--lab-mark-text-size-base);
+  --lab-mark-text-line-height: 0.86;
+}
+
+/* M: shared topbar logo. */
+.project-topbar .lab-mark {
+  --lab-mark-logo-size: var(--lab-mark-logo-size-m);
+  --lab-mark-radius: var(--lab-mark-radius-m);
+  --lab-mark-border-width: var(--lab-mark-border-width-m);
+  --lab-mark-padding: var(--lab-mark-padding-m);
+  --lab-mark-gap: var(--lab-mark-gap-m);
+  --lab-mark-text-size: var(--lab-mark-text-size-m);
+}
+
+/* L: loading screen logo. */
+.lab-mark--large {
+  --lab-mark-logo-size: var(--lab-mark-logo-size-l);
+  --lab-mark-radius: var(--lab-mark-radius-l);
+  --lab-mark-border-width: var(--lab-mark-border-width-l);
+  --lab-mark-padding: var(--lab-mark-padding-l);
+  --lab-mark-gap: var(--lab-mark-gap-l);
+  --lab-mark-text-size: var(--lab-mark-text-size-l);
+  --lab-mark-text-line-height: 0.86;
+}
+
+.lab-mark__glyph {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--lab-mark-logo-size);
+  height: var(--lab-mark-logo-size);
+  flex-shrink: 0;
+}
+
+.lab-mark__logo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: var(--mission-gradient);
+  -webkit-mask-image: url('/logofill.svg');
+  mask-image: url('/logofill.svg');
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+}
+
+.lab-mark__text {
+  display: grid;
+  gap: 1px;
+  justify-items: start;
+  color: var(--ink);
+  font-family: var(--lab-mark-font-family);
+  font-size: var(--lab-mark-text-size);
+  font-weight: var(--lab-mark-font-weight);
+  line-height: var(--lab-mark-text-line-height);
+  text-align: left;
+  text-transform: uppercase;
+  text-shadow: none;
+}
+
+@media (max-width: 640px) {
+  .lab-mark--large {
+    --lab-mark-text-size-l: 1.62rem;
+  }
+}

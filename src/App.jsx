@@ -3,6 +3,7 @@ import { LoadingMenu } from './components/LoadingMenu.jsx';
 import { ProjectDetail } from './components/ProjectDetail.jsx';
 import { ProjectGallery } from './components/ProjectGallery.jsx';
 import { projects } from './data/content.js';
+import { SoundProvider } from './context/SoundContext.jsx';
 
 export default function App() {
   const [screen, setScreen] = useState('loading');
@@ -17,7 +18,7 @@ export default function App() {
       return undefined;
     }
 
-    const timer = window.setTimeout(() => setScreen('projects'), 4200);
+    const timer = window.setTimeout(() => setScreen('projects'), 5800);
     return () => window.clearTimeout(timer);
   }, [screen]);
 
@@ -27,20 +28,22 @@ export default function App() {
   }
 
   return (
-    <div className="app-shell">
-      <div className="screen-noise" aria-hidden="true" />
-      <main>
-        {screen === 'loading' && <LoadingMenu />}
-        {screen === 'projects' && <ProjectGallery projects={projects} onOpen={openProject} />}
-        {screen === 'detail' && (
-          <ProjectDetail
-            project={selectedProject}
-            projects={projects}
-            onBack={() => setScreen('projects')}
-            onSelectProject={setSelectedId}
-          />
-        )}
-      </main>
-    </div>
+    <SoundProvider>
+      <div className={`app-shell ${screen === 'detail' ? `app-shell--${selectedProject.accent}` : ''}`}>
+        <div className="screen-noise" aria-hidden="true" />
+        <main>
+          {screen === 'loading' && <LoadingMenu />}
+          {screen === 'projects' && <ProjectGallery projects={projects} onOpen={openProject} />}
+          {screen === 'detail' && (
+            <ProjectDetail
+              project={selectedProject}
+              projects={projects}
+              onBack={() => setScreen('projects')}
+              onSelectProject={setSelectedId}
+            />
+          )}
+        </main>
+      </div>
+    </SoundProvider>
   );
 }

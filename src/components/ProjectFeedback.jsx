@@ -1,9 +1,11 @@
 import { ArrowUp, Pencil } from 'lucide-react';
 import { useState } from 'react';
+import { useSoundEffects } from '../context/SoundContext.jsx';
 
 const DEFAULT_VISITOR = 'visitor_2048';
 
 export function ProjectFeedback({ messages = [] }) {
+  const { playHover, playClick } = useSoundEffects();
   const [visitorName, setVisitorName] = useState(DEFAULT_VISITOR);
   const [draft, setDraft] = useState('');
   const [localMessages, setLocalMessages] = useState([]);
@@ -51,7 +53,12 @@ export function ProjectFeedback({ messages = [] }) {
             placeholder={`Leave feedback as @${visitorName || DEFAULT_VISITOR}`}
             value={draft}
           />
-          <button type="submit" aria-label="Send feedback">
+          <button
+            type="submit"
+            aria-label="Send feedback"
+            onMouseEnter={playHover}
+            onClick={playClick}
+          >
             <ArrowUp size={17} strokeWidth={2.4} />
           </button>
         </div>

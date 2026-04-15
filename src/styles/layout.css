@@ -1,5 +1,6 @@
 .app-shell {
   --frame-inset: 1rem;
+  --app-frame-color: rgba(100, 220, 255, 0.22);
   position: relative;
   isolation: isolate;
   height: 100dvh;
@@ -7,11 +8,22 @@
   padding: 1.25rem;
 }
 
+.app-shell--blue {
+  --app-frame-color: color-mix(in srgb, var(--cyan) 22%, transparent);
+}
+
+.app-shell--purple {
+  --app-frame-color: color-mix(in srgb, var(--purple) 22%, transparent);
+}
+
+.app-shell--orange {
+  --app-frame-color: color-mix(in srgb, var(--orange) 22%, transparent);
+}
+
 .app-shell::before {
   position: fixed;
   inset: var(--frame-inset);
   z-index: -2;
-  border: 1px solid rgba(100, 220, 255, 0.22);
   box-shadow: 0 0 0 100vmax #080909;
   pointer-events: none;
   content: "";

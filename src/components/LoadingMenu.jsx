@@ -19,6 +19,7 @@ export function LoadingMenu() {
         <p>bending reality</p>
         <div className="loading-menu__bar" aria-hidden="true">
           <span />
+          <div className="loading-menu__bar-text">ACCESSING FILES...</div>
         </div>
       </div>
     </section>

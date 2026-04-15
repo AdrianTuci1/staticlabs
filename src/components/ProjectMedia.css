@@ -57,7 +57,8 @@
 }
 
 .project-media--id-001 .project-media__video-tint {
-  display: none; /* Thunder doesn't use the multiply tint layer */
+  display: none;
+  /* Thunder doesn't use the multiply tint layer */
 }
 
 .project-media--id-001 .project-media__video-container {
@@ -83,13 +84,15 @@
   position: absolute;
   inset: 0;
   /* Technical Pixel Grid Overlay */
-  background-image: 
+  background-image:
     linear-gradient(rgba(0, 0, 0, 0.15) 1px, transparent 1px),
     linear-gradient(90deg, rgba(0, 0, 0, 0.15) 1px, transparent 1px);
   background-size: 3px 3px;
   pointer-events: none;
   z-index: 2;
-.project-card:hover .project-media__video {
-  opacity: 1;
-  transform: translate(-50%, calc(-50% + var(--media-y))) scale(calc(var(--media-zoom) + 0.05));
+
+  .project-card:hover .project-media__video {
+    opacity: 1;
+    transform: translate(-50%, calc(-50% + var(--media-y))) scale(calc(var(--media-zoom) + 0.05));
+  }
 }

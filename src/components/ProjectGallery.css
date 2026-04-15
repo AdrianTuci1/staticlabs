@@ -41,13 +41,6 @@
 }
 
 .archive-header {
-  position: relative;
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
-  gap: 1rem;
-  align-items: center;
-  min-height: 3.9rem;
-  padding-bottom: 0.65rem;
   transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.4s,
     opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.4s,
     margin-top 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.4s;
@@ -61,66 +54,8 @@
   transition-delay: 0.6s;
 }
 
-.archive-header::after {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  left: 12.2rem;
-  height: 1px;
-  content: "";
-  background: var(--line);
-}
-
-.archive-header__left {
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-  min-width: 0;
-  color: var(--cyan);
-  font-size: 0.78rem;
-  font-weight: 800;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-}
-
-.archive-header .hud-kicker,
 .project-gallery__rail span {
   margin: 0;
-}
-
-.archive-header .lab-mark {
-  position: relative;
-  background: rgba(6, 16, 14, 0.56);
-  border: 1px solid transparent;
-  border-radius: 12px;
-  box-shadow: none;
-  overflow: hidden;
-}
-
-.archive-header .lab-mark::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  padding: 1px;
-  border-radius: inherit;
-  background: var(--mission-gradient);
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  pointer-events: none;
-}
-
-.archive-header .lab-mark__text {
-  color: transparent;
-  background: var(--mission-gradient);
-  background-clip: text;
-  -webkit-background-clip: text;
-  font-size: 0.82rem;
-}
-
-.archive-header .lab-mark__glyph {
-  width: 1.55rem;
-  height: 1.55rem;
 }
 
 
@@ -199,7 +134,7 @@
   position: relative;
   flex: 0 0 16rem;
   width: 16rem;
-  height: 19rem;
+  height: 21.85rem;
   min-height: 0;
   padding: 1rem;
   border: 1px solid var(--line-soft);
@@ -382,6 +317,12 @@
   z-index: 5;
 }
 
+.project-gallery__contact .hud-button {
+  min-height: 2.55rem;
+  padding: 0.58rem 1rem;
+  font-size: 0.88rem;
+}
+
 .project-gallery__email {
   display: inline-flex;
   align-items: center;
@@ -392,7 +333,7 @@
   border: none;
   color: var(--cyan);
   background: transparent;
-  font-size: 0.78rem;
+  font-size: 0.88rem;
   font-weight: 800;
   letter-spacing: 0.18em;
   text-transform: lowercase;
@@ -518,17 +459,6 @@
     padding: 0.5rem;
   }
 
-  .archive-header {
-    align-items: start;
-    grid-template-columns: 1fr;
-    justify-content: center;
-  }
-
-  .archive-header::after {
-    left: 0;
-  }
-
-  .archive-header__left,
   .project-gallery__rail {
     letter-spacing: 0.08em;
   }
@@ -548,7 +478,7 @@
   .project-card {
     flex-basis: 14rem;
     width: 14rem;
-    height: 15rem;
+    height: 17.25rem;
   }
 
   .project-card__media {

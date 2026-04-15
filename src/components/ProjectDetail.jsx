@@ -1,11 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
-import { LabMarkLogo } from './LabMarkLogo.jsx';
-import { AnnouncementTicker } from './AnnouncementTicker.jsx';
+import { ProjectTopbar } from './ProjectTopbar.jsx';
 import { ProjectFeedback } from './ProjectFeedback.jsx';
 import { ThunderProject } from './ThunderProject.jsx';
 import { ParrotProject } from './ParrotProject.jsx';
 import { MarkdownContent } from './MarkdownContent.jsx';
 import { ProjectMedia } from './ProjectMedia.jsx';
+import { useSoundEffects } from '../context/SoundContext.jsx';
+import { GlitchButton } from './GlitchButton.jsx';
 import './ProjectDetail.css';
 
 const CRYSTAL_CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789#$)@$*@!)#$%^*)%_+#$^&[]{}<>/\\|~=-+;:,.?';
@@ -47,10 +48,26 @@ function ProjectCursor({ accent, visible }) {
       )}
       {accent === 'orange' && (
         <span className="project-cursor project-cursor--diamond">
-          <span className="project-cursor__arrow project-cursor__arrow--up">^</span>
-          <span className="project-cursor__arrow project-cursor__arrow--right">&gt;</span>
-          <span className="project-cursor__arrow project-cursor__arrow--down">v</span>
-          <span className="project-cursor__arrow project-cursor__arrow--left">&lt;</span>
+          <span className="project-cursor__arrow project-cursor__arrow--up">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5">
+              <path d="M1 11L8 4L15 11" strokeLinecap="square" />
+            </svg>
+          </span>
+          <span className="project-cursor__arrow project-cursor__arrow--right">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5">
+              <path d="M5 1L12 8L5 15" strokeLinecap="square" />
+            </svg>
+          </span>
+          <span className="project-cursor__arrow project-cursor__arrow--down">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5">
+              <path d="M1 5L8 12L15 5" strokeLinecap="square" />
+            </svg>
+          </span>
+          <span className="project-cursor__arrow project-cursor__arrow--left">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5">
+              <path d="M11 1L4 8L11 15" strokeLinecap="square" />
+            </svg>
+          </span>
         </span>
       )}
     </div>
@@ -123,22 +140,35 @@ function ProjectStageContent({ menu, project }) {
   return <ProjectVisualizer menu={menu} project={project} />;
 }
 
+function handleDirectionalHover(e, playHover) {
+  playHover?.();
+  const btn = e.currentTarget;
+  const rect = btn.getBoundingClientRect();
+  const x = e.clientX - rect.left;
+  const y = e.clientY - rect.top;
+  const w = rect.width;
+  const h = rect.height;
+
+  const dists = [
+    { side: 'top', d: y },
+    { side: 'right', d: w - x },
+    { side: 'bottom', d: h - y },
+    { side: 'left', d: x }
+  ];
+
+  const sorted = dists.sort((a, b) => a.d - b.d);
+  const side = sorted[0].side;
+
+  btn.style.setProperty('--slide-start-x', side === 'left' ? '-100%' : side === 'right' ? '100%' : '0');
+  btn.style.setProperty('--slide-start-y', side === 'top' ? '-100%' : side === 'bottom' ? '100%' : '0');
+}
+
 function DetailHeader({ onBack }) {
-  return (
-    <header className="detail-topbar">
-      <button className="lab-mark" type="button" onClick={onBack} aria-label="Back to projects">
-        <LabMarkLogo />
-        <span className="lab-mark__text">
-          <span>static</span>
-          <span>labs</span>
-        </span>
-      </button>
-      <AnnouncementTicker />
-    </header>
-  );
+  return <ProjectTopbar className="detail-topbar" logoText={['static', 'labs']} logoLabel="Back to projects" onLogoClick={onBack} />;
 }
 
 function DetailTabs({ onBack, onNext, onPrevious }) {
+  const { playClick, playHover } = useSoundEffects();
   return (
     <div className="detail-tabs" aria-label="Project navigation">
       <div className="detail-tabs__mark" aria-hidden="true">
@@ -147,13 +177,37 @@ function DetailTabs({ onBack, onNext, onPrevious }) {
         <span className="detail-tabs__stripe detail-tabs__stripe--three" />
       </div>
       <div className="detail-tabs__items">
-        <button type="button" onClick={onPrevious} aria-label="Previous project">
+        <button
+          type="button"
+          onMouseEnter={(e) => handleDirectionalHover(e, playHover)}
+          onClick={(e) => {
+            playClick();
+            onPrevious();
+          }}
+          aria-label="Previous project"
+        >
           &lt;
         </button>
-        <button type="button" onClick={onNext} aria-label="Next project">
+        <button
+          type="button"
+          onMouseEnter={(e) => handleDirectionalHover(e, playHover)}
+          onClick={(e) => {
+            playClick();
+            onNext();
+          }}
+          aria-label="Next project"
+        >
           &gt;
         </button>
-        <button type="button" onClick={onBack} aria-label="Back to projects">
+        <button
+          type="button"
+          onMouseEnter={(e) => handleDirectionalHover(e, playHover)}
+          onClick={(e) => {
+            playClick();
+            onBack();
+          }}
+          aria-label="Back to projects"
+        >
           x
         </button>
       </div>
@@ -162,6 +216,8 @@ function DetailTabs({ onBack, onNext, onPrevious }) {
 }
 
 function DetailSidebar({ activeMenuIndex, project, projectMenus, onSelectMenu }) {
+  const { playClick, playHover } = useSoundEffects();
+
   return (
     <aside className="detail-sidebar" aria-label="Project menu">
       <p className="hud-kicker">{project.id} // {project.code}</p>
@@ -170,21 +226,32 @@ function DetailSidebar({ activeMenuIndex, project, projectMenus, onSelectMenu })
         {project.description}
       </p>
       <div className="detail-sidebar__list">
-        {projectMenus.map((menu, index) => (
-          <button
-            className={index === activeMenuIndex ? 'is-selected' : ''}
-            key={menu.id}
-            type="button"
-            onClick={() => onSelectMenu(index)}
-          >
-            <span>{String(index + 1).padStart(2, '0')}</span>
-            {menu.label}
-          </button>
-        ))}
+        {projectMenus.map((menu, index) => {
+          const isSelected = index === activeMenuIndex;
+          return (
+            <button
+              className={isSelected ? 'is-selected' : ''}
+              key={menu.id}
+              type="button"
+              onMouseEnter={(e) => !isSelected && handleDirectionalHover(e, playHover)}
+              onClick={() => {
+                if (isSelected) return;
+                playClick();
+                onSelectMenu(index);
+              }}
+            >
+              <span>{String(index + 1).padStart(2, '0')}</span>
+              {menu.label}
+            </button>
+          );
+        })}
       </div>
-      <button className="detail-sidebar__terms" type="button">
-        See live
-      </button>
+      <div className="detail-sidebar__actions">
+        <GlitchButton
+          text="see project live"
+          onClick={() => {}}
+        />
+      </div>
     </aside>
   );
 }

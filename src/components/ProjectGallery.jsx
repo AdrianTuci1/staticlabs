@@ -1,8 +1,9 @@
-import { LabMarkLogo } from './LabMarkLogo.jsx';
-import { AnnouncementTicker } from './AnnouncementTicker.jsx';
 import { useEffect, useRef, useState } from 'react';
 import { ProjectMedia } from './ProjectMedia.jsx';
 import { MissionView } from './MissionView.jsx';
+import { useSoundEffects } from '../context/SoundContext.jsx';
+import { GlitchButton } from './GlitchButton.jsx';
+import { ProjectTopbar } from './ProjectTopbar.jsx';
 import './ProjectGallery.css';
 
 const SCRAMBLE_CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/#%<>[]{}';
@@ -22,6 +23,7 @@ function ProjectCardAnimation({ projectId, accent }) {
 }
 
 function ProjectCard({ project, index, onOpen, isExiting, baseDelay = 0 }) {
+  const { playHover, playClick } = useSoundEffects();
   const [label, setLabel] = useState(project.title);
   const intervalRef = useRef(null);
   const timeoutRef = useRef(null);
@@ -60,9 +62,18 @@ function ProjectCard({ project, index, onOpen, isExiting, baseDelay = 0 }) {
         '--project-card-exit-delay': `${index * 80}ms`
       }}
       type="button"
-      onClick={() => onOpen(project.id)}
-      onFocus={glitchTitle}
-      onMouseEnter={glitchTitle}
+      onClick={() => {
+        playClick();
+        onOpen(project.id);
+      }}
+      onFocus={() => {
+        playHover();
+        glitchTitle();
+      }}
+      onMouseEnter={() => {
+        playHover();
+        glitchTitle();
+      }}
     >
       <span className="project-card__code">
         {project.id} // {project.code}
@@ -78,86 +89,8 @@ function ProjectCard({ project, index, onOpen, isExiting, baseDelay = 0 }) {
   );
 }
 
-function MissionButton({ isActive, onClick }) {
-  const buttonRef = useRef(null);
-  const [direction, setDirection] = useState('');
-  const [label, setLabel] = useState(isActive ? 'FILES' : 'our mission');
-  const intervalRef = useRef(null);
-  const timeoutRef = useRef(null);
-
-  useEffect(() => {
-    setLabel(isActive ? 'FILES' : 'our mission');
-  }, [isActive]);
-
-  useEffect(() => {
-    return () => {
-      window.clearInterval(intervalRef.current);
-      window.clearTimeout(timeoutRef.current);
-    };
-  }, []);
-
-  function glitchTitle() {
-    window.clearInterval(intervalRef.current);
-    window.clearTimeout(timeoutRef.current);
-
-    const targetText = isActive ? 'FILES' : 'our mission';
-    setLabel(scrambleText(targetText));
-    intervalRef.current = window.setInterval(() => {
-      setLabel(scrambleText(targetText));
-    }, 55);
-
-    timeoutRef.current = window.setTimeout(() => {
-      window.clearInterval(intervalRef.current);
-      setLabel(targetText);
-    }, 420);
-  }
-
-  const handleMouseEnter = (e) => {
-    glitchTitle();
-    if (!buttonRef.current) return;
-
-    const rect = buttonRef.current.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    const w = rect.width;
-    const h = rect.height;
-
-    const dists = [
-      { side: 'top', d: y },
-      { side: 'right', d: w - x },
-      { side: 'bottom', d: h - y },
-      { side: 'left', d: x }
-    ];
-
-    const sorted = dists.sort((a, b) => a.d - b.d);
-    const side = sorted[0].side;
-
-    const btn = buttonRef.current;
-    btn.style.setProperty('--slide-start-x', side === 'left' ? '-100%' : side === 'right' ? '100%' : '0');
-    btn.style.setProperty('--slide-start-y', side === 'top' ? '-100%' : side === 'bottom' ? '100%' : '0');
-
-    setDirection(side);
-  };
-
-  const handleMouseLeave = () => {
-    setDirection('');
-  };
-
-  return (
-    <button
-      ref={buttonRef}
-      className={`hud-button hud-button--mission ${direction ? `is-hovered-${direction}` : ''}`}
-      type="button"
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-      onClick={onClick}
-    >
-      {label}
-    </button>
-  );
-}
-
 export function ProjectGallery({ projects, onOpen }) {
+  const { playClick, playHover } = useSoundEffects();
   const [isMissionActive, setIsMissionActive] = useState(false);
   const [isGlitching, setIsGlitching] = useState(false);
   const [currentTime, setCurrentTime] = useState(new Date());
@@ -245,22 +178,20 @@ export function ProjectGallery({ projects, onOpen }) {
       onPointerMove={handlePointerMove}
     >
       <span className={`project-gallery__cursor ${isCursorVisible ? 'is-visible' : ''}`} aria-hidden="true" />
-      <header className="archive-header">
-        <div className="archive-header__left">
-          <div className="lab-mark" aria-label="static labs">
-            <LabMarkLogo />
-            <span className="lab-mark__text">
-              <span>STATIC</span>
-              <span>LABS</span>
-            </span>
-          </div>
-          <span>sound off</span>
-        </div>
-        {/* <AnnouncementTicker /> */}
-        <a href="mailto:hello@staticlabs.ro" className="project-gallery__email">
-          hello@staticlabs.ro
-        </a>
-      </header>
+      <ProjectTopbar
+        className="archive-header"
+        showTicker={false}
+        rightAction={(
+          <a
+            href="mailto:hello@staticlabs.ro"
+            className="project-gallery__email"
+            onMouseEnter={playHover}
+            onClick={playClick}
+          >
+            hello@staticlabs.ro
+          </a>
+        )}
+      />
 
       <div className="project-gallery__rail">
         <span className={isGlitching ? 'glitch-rail' : ''}>
@@ -287,7 +218,10 @@ export function ProjectGallery({ projects, onOpen }) {
       </div>
 
       <div className="project-gallery__contact">
-        <MissionButton isActive={isMissionActive} onClick={toggleMission} />
+        <GlitchButton
+          text={isMissionActive ? 'FILES' : 'our mission'}
+          onClick={toggleMission}
+        />
       </div>
     </section>
   );
