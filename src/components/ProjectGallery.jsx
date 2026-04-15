@@ -1,9 +1,7 @@
 import { LabMarkLogo } from './LabMarkLogo.jsx';
 import { AnnouncementTicker } from './AnnouncementTicker.jsx';
 import { useEffect, useRef, useState } from 'react';
-import { StripeAnimation } from './StripeAnimation.jsx';
-import { RippleAnimation } from './RippleAnimation.jsx';
-import { DNAAnimation } from './DNAAnimation.jsx';
+import { ProjectMedia } from './ProjectMedia.jsx';
 import { MissionView } from './MissionView.jsx';
 import './ProjectGallery.css';
 
@@ -19,17 +17,8 @@ function scrambleText(text) {
   }).join('');
 }
 
-function ProjectCardAnimation({ projectId, responsiveToScroll = false }) {
-  switch (projectId) {
-    case '001':
-      return <StripeAnimation responsiveToScroll={responsiveToScroll} />;
-    case '002':
-      return <RippleAnimation responsiveToScroll={responsiveToScroll} />;
-    case '003':
-      return <DNAAnimation responsiveToScroll={responsiveToScroll} scale={0.6} yOffset={-0.15} />;
-    default:
-      return null;
-  }
+function ProjectCardAnimation({ projectId, accent }) {
+  return <ProjectMedia projectId={projectId} accent={accent} />;
 }
 
 function ProjectCard({ project, index, onOpen, isExiting, baseDelay = 0 }) {
@@ -79,7 +68,7 @@ function ProjectCard({ project, index, onOpen, isExiting, baseDelay = 0 }) {
         {project.id} // {project.code}
       </span>
       <span className="project-card__media" aria-hidden="true">
-        <ProjectCardAnimation projectId={project.id} />
+        <ProjectCardAnimation projectId={project.id} accent={project.accent} />
         <span className="project-card__target">
           <span className="project-card__target-inner" />
         </span>

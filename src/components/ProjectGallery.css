@@ -48,9 +48,9 @@
   align-items: center;
   min-height: 3.9rem;
   padding-bottom: 0.65rem;
-  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.4s, 
-              opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.4s, 
-              margin-top 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.4s;
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.4s,
+    opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.4s,
+    margin-top 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.4s;
 }
 
 .is-mission-active .archive-header {
@@ -65,7 +65,7 @@
   position: absolute;
   right: 0;
   bottom: 0;
-  left: 10.4rem;
+  left: 12.2rem;
   height: 1px;
   content: "";
   background: var(--line);
@@ -89,10 +89,25 @@
 }
 
 .archive-header .lab-mark {
-  border-color: transparent;
-  border-image-slice: 1;
-  border-image-source: var(--mission-gradient);
+  position: relative;
+  background: rgba(6, 16, 14, 0.56);
+  border: 1px solid transparent;
+  border-radius: 12px;
   box-shadow: none;
+  overflow: hidden;
+}
+
+.archive-header .lab-mark::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 1px;
+  border-radius: inherit;
+  background: var(--mission-gradient);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
 }
 
 .archive-header .lab-mark__text {
@@ -100,6 +115,12 @@
   background: var(--mission-gradient);
   background-clip: text;
   -webkit-background-clip: text;
+  font-size: 0.82rem;
+}
+
+.archive-header .lab-mark__glyph {
+  width: 1.55rem;
+  height: 1.55rem;
 }
 
 
@@ -133,11 +154,25 @@
 }
 
 @keyframes rail-glitch {
-  0% { transform: translate(0); }
-  25% { transform: translate(2px, -1px); }
-  50% { transform: translate(-2px, 1px); }
-  75% { transform: translate(1px, 2px); }
-  100% { transform: translate(0); }
+  0% {
+    transform: translate(0);
+  }
+
+  25% {
+    transform: translate(2px, -1px);
+  }
+
+  50% {
+    transform: translate(-2px, 1px);
+  }
+
+  75% {
+    transform: translate(1px, 2px);
+  }
+
+  100% {
+    transform: translate(0);
+  }
 }
 
 .project-cards {
@@ -197,22 +232,22 @@
     linear-gradient(158deg, rgba(100, 220, 255, 0.32), rgba(255, 255, 255, 0.06));
 }
 
-.project-card--red {
-  --card-accent: var(--red);
-  --abstract-color: rgba(255, 91, 88, 0.3);
+.project-card--purple {
+  --card-accent: var(--purple);
+  --abstract-color: rgba(157, 91, 210, 0.3);
   --project-card-field:
-    radial-gradient(circle at 50% 50%, transparent 0 12%, rgba(255, 91, 88, 0.34) 12.4% 12.9%, transparent 13.2% 23%, rgba(255, 91, 88, 0.24) 23.5% 24%, transparent 24.4%),
-    conic-gradient(from 0.15turn at 50% 50%, transparent 0 18%, rgba(255, 91, 88, 0.36) 18% 21%, transparent 21% 55%, rgba(255, 210, 93, 0.2) 55% 57%, transparent 57% 100%),
-    linear-gradient(145deg, rgba(255, 91, 88, 0.3), rgba(255, 255, 255, 0.05));
+    radial-gradient(circle at 50% 50%, transparent 0 12%, rgba(157, 91, 210, 0.34) 12.4% 12.9%, transparent 13.2% 23%, rgba(157, 91, 210, 0.24) 23.5% 24%, transparent 24.4%),
+    conic-gradient(from 0.15turn at 50% 50%, transparent 0 18%, rgba(157, 91, 210, 0.36) 18% 21%, transparent 21% 55%, rgba(157, 91, 210, 0.2) 55% 57%, transparent 57% 100%),
+    linear-gradient(145deg, rgba(157, 91, 210, 0.3), rgba(255, 255, 255, 0.05));
 }
 
-.project-card--yellow {
-  --card-accent: var(--yellow);
-  --abstract-color: rgba(255, 210, 93, 0.3);
+.project-card--orange {
+  --card-accent: var(--orange);
+  --abstract-color: rgba(255, 146, 51, 0.3);
   --project-card-field:
-    repeating-linear-gradient(135deg, rgba(255, 210, 93, 0.32) 0 1px, transparent 1px 1.1rem),
-    linear-gradient(45deg, transparent 0 42%, rgba(255, 210, 93, 0.46) 42.4% 43.2%, transparent 43.6%),
-    linear-gradient(155deg, rgba(255, 210, 93, 0.28), rgba(255, 255, 255, 0.06));
+    repeating-linear-gradient(135deg, rgba(255, 146, 51, 0.32) 0 1px, transparent 1px 1.1rem),
+    linear-gradient(45deg, transparent 0 42%, rgba(255, 146, 51, 0.46) 42.4% 43.2%, transparent 43.6%),
+    linear-gradient(155deg, rgba(255, 146, 51, 0.28), rgba(255, 255, 255, 0.06));
 }
 
 .project-card__code {
@@ -463,6 +498,7 @@
 }
 
 @keyframes project-target-inner-bounce {
+
   0%,
   100% {
     transform: translate3d(-50%, -50%, 0) scale(1);

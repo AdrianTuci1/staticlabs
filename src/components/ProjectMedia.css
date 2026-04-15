@@ -1,0 +1,95 @@
+.project-media {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: color-mix(in srgb, var(--media-color) var(--media-bg-mix), #000);
+}
+
+.project-media__video-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  transform: translate(-50%, calc(-50% + var(--media-y))) scale(var(--media-zoom));
+  /* Removes all black after the tint has been applied */
+  mix-blend-mode: screen;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.project-media__video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Elements are treated as white on black source */
+  filter: grayscale(1) brightness(1.2);
+}
+
+.project-media__video-tint {
+  position: absolute;
+  inset: 0;
+  /* This is the source color for the waves/DNA */
+  background: var(--media-color);
+  /* Multiplies the color with the video: Black stays Black, White becomes the Color */
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+.project-media--id-002 .project-media__video-container {
+  opacity: var(--media-opacity);
+}
+
+.project-media--id-002 .project-media__video {
+  /* Control the tint intensity via brightness of the source B&W elements */
+  filter: brightness(0.4) contrast(1.1);
+}
+
+.project-media--id-001 .project-media__video {
+  filter: grayscale(1) brightness(1.8) contrast(1.1);
+  mix-blend-mode: screen;
+}
+
+.project-media--id-001 .project-media__video-tint {
+  display: none; /* Thunder doesn't use the multiply tint layer */
+}
+
+.project-media--id-001 .project-media__video-container {
+  opacity: 0.15;
+  mask-image: linear-gradient(to bottom, black var(--media-mask-start), transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black var(--media-mask-start), transparent 100%);
+}
+
+.project-media__video-container {
+  /* Default focused radial mask for most projects */
+  mask-image: radial-gradient(ellipse at 50% 35%, black 15%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse at 50% 35%, black 15%, transparent 75%);
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.project-media:hover .project-media__video-container {
+  opacity: 1 !important;
+  transform: translate(-50%, calc(-50% + var(--media-y))) scale(calc(var(--media-zoom) + 0.05));
+}
+
+.project-media__overlay {
+  position: absolute;
+  inset: 0;
+  /* Technical Pixel Grid Overlay */
+  background-image: 
+    linear-gradient(rgba(0, 0, 0, 0.15) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.15) 1px, transparent 1px);
+  background-size: 3px 3px;
+  pointer-events: none;
+  z-index: 2;
+.project-card:hover .project-media__video {
+  opacity: 1;
+  transform: translate(-50%, calc(-50% + var(--media-y))) scale(calc(var(--media-zoom) + 0.05));
+}

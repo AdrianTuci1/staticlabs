@@ -265,6 +265,8 @@
 
 .thunder-project__brand-glyph .lab-mark__logo {
   background: #f7f7f8;
+  -webkit-mask-image: url('/logo.svg');
+  mask-image: url('/logo.svg');
 }
 
 

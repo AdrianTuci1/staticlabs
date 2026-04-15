@@ -5,9 +5,7 @@ import { ProjectFeedback } from './ProjectFeedback.jsx';
 import { ThunderProject } from './ThunderProject.jsx';
 import { ParrotProject } from './ParrotProject.jsx';
 import { MarkdownContent } from './MarkdownContent.jsx';
-import { StripeAnimation } from './StripeAnimation.jsx';
-import { RippleAnimation } from './RippleAnimation.jsx';
-import { DNAAnimation } from './DNAAnimation.jsx';
+import { ProjectMedia } from './ProjectMedia.jsx';
 import './ProjectDetail.css';
 
 const CRYSTAL_CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789#$)@$*@!)#$%^*)%_+#$^&[]{}<>/\\|~=-+;:,.?';
@@ -24,17 +22,9 @@ function scrambleText(text, revealRatio = 0) {
   }).join('');
 }
 
-function ProjectDetailAnimation({ projectId }) {
-  switch (projectId) {
-    case '001':
-      return null;
-    case '002':
-      return <RippleAnimation responsiveToScroll={true} />;
-    case '003':
-      return <DNAAnimation responsiveToScroll={true} />;
-    default:
-      return null;
-  }
+function ProjectDetailAnimation({ projectId, accent }) {
+  if (projectId === '001') return null;
+  return <ProjectMedia projectId={projectId} accent={accent} />;
 }
 
 function ProjectCursor({ accent, visible }) {
@@ -47,7 +37,7 @@ function ProjectCursor({ accent, visible }) {
           <span className="project-cursor project-cursor--target" />
         </>
       )}
-      {accent === 'red' && (
+      {accent === 'purple' && (
         <>
           <span className="project-cursor project-cursor--dot" />
           <span className="project-cursor project-cursor--orbit project-cursor--orbit-one" />
@@ -55,7 +45,7 @@ function ProjectCursor({ accent, visible }) {
           <span className="project-cursor project-cursor--orbit project-cursor--orbit-three" />
         </>
       )}
-      {accent === 'yellow' && (
+      {accent === 'orange' && (
         <span className="project-cursor project-cursor--diamond">
           <span className="project-cursor__arrow project-cursor__arrow--up">^</span>
           <span className="project-cursor__arrow project-cursor__arrow--right">&gt;</span>
@@ -269,10 +259,10 @@ export function ProjectDetail({ project, projects, onBack, onSelectProject }) {
     >
       <ProjectCursor accent={project.accent} visible={isCursorVisible} />
       <div className="project-detail__animation">
-        {project.title === 'Thunder' && (
+        {project.id === '001' && (
           <div className="project-detail__bg-image project-detail__bg-image--thunder" aria-hidden="true" />
         )}
-        <ProjectDetailAnimation projectId={project.id} />
+        <ProjectDetailAnimation projectId={project.id} accent={project.accent} />
       </div>
       <DetailHeader onBack={onBack} />
       <DetailTabs

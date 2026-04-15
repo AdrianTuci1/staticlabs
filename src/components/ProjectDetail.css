@@ -94,8 +94,19 @@
   grid-template-columns: auto 1fr;
   gap: 1rem;
   align-items: center;
-  min-height: 4.2rem;
-  border-bottom: 1px solid color-mix(in srgb, var(--project-theme) 64%, transparent);
+  min-height: 3.9rem;
+  padding-bottom: 0.65rem;
+  border-bottom: 0;
+}
+
+.detail-topbar::after {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 12.55rem;
+  height: 1px;
+  content: "";
+  background: var(--line);
 }
 
 .detail-topbar .hud-kicker {
@@ -104,10 +115,25 @@
 }
 
 .detail-topbar .lab-mark {
-  border-color: transparent;
-  border-image-slice: 1;
-  border-image-source: var(--mission-gradient);
+  position: relative;
+  background: rgba(6, 16, 14, 0.56);
+  border: 1px solid transparent;
+  border-radius: 12px;
   box-shadow: none;
+  overflow: hidden;
+}
+
+.detail-topbar .lab-mark::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 1px;
+  border-radius: inherit;
+  background: var(--mission-gradient);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
 }
 
 .detail-topbar .lab-mark__text {

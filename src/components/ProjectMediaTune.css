@@ -1,0 +1,74 @@
+/* 
+  PROJECT MEDIA TUNING DOCUMENT
+  Use this file to regulate positioning, zoom, colors, and masks for each project background.
+*/
+
+/* --- GLOBAL DEFAULTS --- */
+.project-media {
+  --media-zoom: 1.1;
+  --media-y: 0%;
+  --media-color: var(--cyan);
+  --media-bg-mix: 12%;
+  --media-mask-start: 55%;
+  --media-opacity: 0.82;
+}
+
+/* --- PROJECT 001: THUNDER --- */
+.project-media--id-001 {
+  --media-y: -35%;
+  --media-zoom: 1;
+  --media-color: rgba(40, 139, 244, 0.783);
+  background: var(--media-color);
+  /* Special: Solid Blue background */
+}
+
+.project-media--id-001 .project-media__video {
+  filter: grayscale(1) brightness(1) contrast(1.1);
+  mix-blend-mode: screen;
+}
+
+.project-media--id-001 .project-media__video-tint {
+  display: none;
+  /* Thunder doesn't use the multiply tint layer */
+}
+
+.project-media--id-001 .project-media__video-container {
+  opacity: 0.15;
+  mask-image: linear-gradient(to bottom, black var(--media-mask-start), transparent 100%) !important;
+  -webkit-mask-image: linear-gradient(to bottom, black var(--media-mask-start), transparent 100%) !important;
+}
+
+.project-media--id-002 {
+  --media-y: -28%;
+  --media-zoom: 1;
+  --media-color: #9240d4;
+  --media-bg-mix: 30%;
+  --media-opacity: 0.65;
+  background: color-mix(in srgb, var(--media-color) var(--media-bg-mix), #000);
+}
+
+.project-media--id-002 .project-media__video {
+  /* Control the tint intensity via brightness of the source B&W elements */
+  filter: brightness(0.4) contrast(1.1);
+}
+
+.project-media--id-002 .project-media__video-container {
+  opacity: var(--media-opacity);
+}
+
+.project-media--id-003 {
+  --media-y: -20%;
+  --media-zoom: 1;
+  --media-color: #ff9233;
+  --media-bg-mix: 40%;
+  --media-opacity: 0.6;
+  background: color-mix(in srgb, var(--media-color) var(--media-bg-mix), #000);
+}
+
+.project-media--id-003 .project-media__video {
+  filter: brightness(0.35) contrast(1.1);
+}
+
+.project-media--id-003 .project-media__video-container {
+  opacity: var(--media-opacity);
+}

@@ -43,7 +43,7 @@
     "code": "SE",
     "title": "Statsparrot",
     "status": "calibrating",
-    "accent": "red",
+    "accent": "purple",
     "image": "/static-labs-signal.svg",
     "description": "Sports intelligence workspace for tracking signals, comparing model reads, and turning match data into faster decisions.",
     "menus": [
@@ -82,7 +82,7 @@
     "code": "PA",
     "title": "Pixtooth",
     "status": "draft",
-    "accent": "yellow",
+    "accent": "orange",
     "image": "/static-labs-signal.svg",
     "description": "Image prompt and asset system for exploring visual variants, organizing prompt runs, and shipping cleaner creative states.",
     "menus": [
