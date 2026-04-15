@@ -4,6 +4,7 @@ import { AnnouncementTicker } from './AnnouncementTicker.jsx';
 import { ProjectFeedback } from './ProjectFeedback.jsx';
 import { ThunderProject } from './ThunderProject.jsx';
 import { ParrotProject } from './ParrotProject.jsx';
+import { MarkdownContent } from './MarkdownContent.jsx';
 import './ProjectDetail.css';
 
 const CRYSTAL_CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789#$)@$*@!)#$%^*)%_+#$^&[]{}<>/\\|~=-+;:,.?';
@@ -76,28 +77,7 @@ function CrystallizedText({ text }) {
   return renderedText;
 }
 
-function MermaidText({ text, crystallize = false }) {
-  const paragraphs = text.split(/\n{2,}/).filter(Boolean);
-  const [headline = '', ...sections] = paragraphs;
-  const sectionLabels = ['Context', 'Prototype', 'Shift', 'Signals', 'Benefits', 'Next stage', 'Summary'];
 
-  return (
-    <div className="mermaid-text" aria-label="Mermaid presentation text">
-      <article className="mermaid-text__article">
-        <header className="mermaid-text__header">
-          <span>presentation</span>
-          <h3>{crystallize ? <CrystallizedText text={headline} /> : headline}</h3>
-        </header>
-        {sections.map((paragraph, index) => (
-          <section className="mermaid-text__section" key={paragraph}>
-            <h4>{sectionLabels[index] ?? `Part ${index + 1}`}</h4>
-            <p>{crystallize ? <CrystallizedText text={paragraph} /> : paragraph}</p>
-          </section>
-        ))}
-      </article>
-    </div>
-  );
-}
 
 function ProjectVisualizer({ menu, project }) {
   return (
@@ -119,7 +99,11 @@ function ProjectStageContent({ menu, project }) {
   }
 
   if (menu.type === 'mermaid') {
-    return <MermaidText text={menu.mermaid} crystallize={project.title === 'Thunder'} />;
+    return (
+      <div className="mermaid-text" aria-label="Markdown presentation text">
+        <MarkdownContent content={menu.mermaid} />
+      </div>
+    );
   }
 
   if (project.title === 'Thunder') {

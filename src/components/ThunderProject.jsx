@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { LabMarkLogo } from './LabMarkLogo.jsx';
 import { ArrowUp, BrainCircuit, Earth } from 'lucide-react';
 import { ProjectTimeline } from './ProjectTimeline.jsx';
+import { MarkdownContent } from './MarkdownContent.jsx';
 import './ThunderProject.css';
 
 const CRYSTAL_CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789#$)@$*@!)#$%^*)%_+#$^&[]{}<>/\\|~=-+;:,.?';
@@ -11,24 +12,27 @@ const REPLAY_DELAY = 2200;
 const RESPONSE_HOLD = 2600;
 const SEND_HOLD = 520;
 
-const PRESENTATION_POINTS = [
-  {
-    title: 'How we got here',
-    text:
-      'Thunder was shaped around the moment where a user asks a direct question and expects the first useful answer before the thread loses energy. The prototype reduces ceremony around the response, keeps formatting close to the reasoning, and treats latency as part of the product experience rather than a separate benchmark.',
-  },
-  {
-    title: 'What changed',
-    text:
-      'The interface now rewards concise answers, structured output, and repeatable presentation formats. Instead of a visualizer that performs abstraction, Thunder behaves like a working assistant: prompt, answer, table, code, summary.',
-  },
-  {
-    title: 'Benefits',
-    text:
-      'Teams can test response quality, formatting, and perceived speed in the same surface. The result is easier to demo, easier to compare across runs, and clearer for product workflows where waiting breaks momentum.',
-  },
-];
+const THUNDER_MARKDOWN = `
+# Technical Report: Thunder - Diffusion-based dLLM Framework
+## Parallel Continuous Diffusion for High-Throughput Inference
 
+### Abstract
+The Thunder framework introduces an architectural alternative to conventional autoregressive generation by implementing **Parallel Continuous Diffusion (PCD)**. Our research demonstrates that by bypassing the sequential decoding bottleneck, iterative denoising processes can enable simultaneous refinement of large text blocks, achieving throughput levels previously unattainable for models in the 1B-2B parameter range.
+
+### 1. Sequential Bottleneck Decoupling
+Conventional LLM inference relies on token-by-token generation (O(n)), where each step is constrained by the latency of the previous token. Thunder treats the target output space as a fixed-size multidimensional canvas. The model performs global refinement passes across the entire canvas simultaneously, utilizing a continuous latent space to arrive at coherent linguistic structures in a fraction of the time required by sequential decoders.
+
+### 2. Dynamic Canvas and Context Pipeline
+To manage varying prompt complexities, we implemented a 2048-token context-aware pipeline. The **Dynamic Canvas** system monitors structural entropy during the generation process, dynamically reallocating VRAM and computational cycles to high-complexity segments of the response while bypassing low-entropy regions. This ensures optimal resource density throughout the inference cycle.
+
+### 3. Cuda/Triton Kernel Optimization
+Experimental results on A100 clusters were achieved through the development of specialized execution kernels. These kernels are hard-coded to optimize the iterative refinement loops of the diffusion process, resulting in **5x higher inference speeds** compared to baseline autoregressive models while maintaining competitive semantic precision and structural coherence.
+
+### 4. Preliminary Results
+Internal benchmarks indicate that Thunder (approx. 1B params) achieves reasoning density comparable to 500M-700M autoregressive models, with a significant advantage in batch processing and low-latency interaction scenarios.
+
+[staticlabs.ro](https://staticlabs.ro)
+`;
 const DEMO_SCRIPT = [
   {
     prompt: 'Can you summarize latency, quality, and reliability signals for the Thunder demo?',
@@ -254,20 +258,7 @@ function ThunderPresentation() {
   return (
     <section className="thunder-project thunder-project--presentation" aria-label="Thunder presentation">
       <div className="thunder-project__presentation-shell">
-        <p className="thunder-project__eyebrow">presentation</p>
-        <h3>Instant answers without shallow thinking.</h3>
-        <p className="thunder-project__lede">
-          Thunder is designed around one practical promise: the answer should arrive quickly enough to keep momentum,
-          while still carrying the structure that makes it usable.
-        </p>
-        <article className="thunder-project__article">
-          {PRESENTATION_POINTS.map((point) => (
-            <section className="thunder-project__article-section" key={point.title}>
-              <h4>{point.title}</h4>
-              <p>{point.text}</p>
-            </section>
-          ))}
-        </article>
+        <MarkdownContent content={THUNDER_MARKDOWN} />
       </div>
     </section>
   );

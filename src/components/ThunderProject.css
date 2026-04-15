@@ -57,7 +57,17 @@
   max-width: 48rem;
   margin-top: 1.9rem;
   padding-top: 1.35rem;
-  border-top: 1px solid #2f3437;
+  border-top: 1px solid #331a1a;
+}
+
+.thunder-project__diagram-wrapper {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #331a1a;
+  background: #0d0606;
+  padding: 1rem;
 }
 
 .thunder-project__article-section {
