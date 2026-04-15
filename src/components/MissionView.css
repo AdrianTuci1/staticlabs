@@ -1,0 +1,58 @@
+.mission-view {
+  grid-row: 3;
+  grid-column: 1 / -1;
+  width: min(42rem, 100%);
+  margin-inline: auto;
+  min-height: 0;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  padding: 1.2rem 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0s, 
+              transform 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0s;
+  transform: translateY(1.4rem);
+  z-index: 5;
+}
+
+.mission-view.is-active {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+  transition-delay: 1.2s;
+}
+
+.mission-view__container {
+  width: 100%;
+  max-height: 100%;
+  overflow-y: auto;
+  padding: 1.5rem 0 10rem;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+/* Custom scrollbar for mission view */
+.mission-view__container::-webkit-scrollbar {
+  width: 4px;
+}
+
+.mission-view__container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.mission-view__container::-webkit-scrollbar-thumb {
+  background: var(--line-soft);
+  border-radius: 2px;
+}
+
+@media (max-width: 640px) {
+  .mission-view {
+    padding: 0.5rem;
+  }
+  
+  .mission-view__container {
+    padding: 1.5rem;
+  }
+}

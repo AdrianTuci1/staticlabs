@@ -5,6 +5,9 @@ import { ProjectFeedback } from './ProjectFeedback.jsx';
 import { ThunderProject } from './ThunderProject.jsx';
 import { ParrotProject } from './ParrotProject.jsx';
 import { MarkdownContent } from './MarkdownContent.jsx';
+import { StripeAnimation } from './StripeAnimation.jsx';
+import { RippleAnimation } from './RippleAnimation.jsx';
+import { DNAAnimation } from './DNAAnimation.jsx';
 import './ProjectDetail.css';
 
 const CRYSTAL_CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789#$)@$*@!)#$%^*)%_+#$^&[]{}<>/\\|~=-+;:,.?';
@@ -19,6 +22,19 @@ function scrambleText(text, revealRatio = 0) {
 
     return CRYSTAL_CHARS[Math.floor(Math.random() * CRYSTAL_CHARS.length)];
   }).join('');
+}
+
+function ProjectDetailAnimation({ projectId }) {
+  switch (projectId) {
+    case '001':
+      return null;
+    case '002':
+      return <RippleAnimation responsiveToScroll={true} />;
+    case '003':
+      return <DNAAnimation responsiveToScroll={true} />;
+    default:
+      return null;
+  }
 }
 
 function ProjectCursor({ accent, visible }) {
@@ -135,7 +151,11 @@ function DetailHeader({ onBack }) {
 function DetailTabs({ onBack, onNext, onPrevious }) {
   return (
     <div className="detail-tabs" aria-label="Project navigation">
-      <div className="detail-tabs__mark" aria-hidden="true" />
+      <div className="detail-tabs__mark" aria-hidden="true">
+        <span className="detail-tabs__stripe detail-tabs__stripe--one" />
+        <span className="detail-tabs__stripe detail-tabs__stripe--two" />
+        <span className="detail-tabs__stripe detail-tabs__stripe--three" />
+      </div>
       <div className="detail-tabs__items">
         <button type="button" onClick={onPrevious} aria-label="Previous project">
           &lt;
@@ -248,6 +268,12 @@ export function ProjectDetail({ project, projects, onBack, onSelectProject }) {
       onPointerMove={handlePointerMove}
     >
       <ProjectCursor accent={project.accent} visible={isCursorVisible} />
+      <div className="project-detail__animation">
+        {project.title === 'Thunder' && (
+          <div className="project-detail__bg-image project-detail__bg-image--thunder" aria-hidden="true" />
+        )}
+        <ProjectDetailAnimation projectId={project.id} />
+      </div>
       <DetailHeader onBack={onBack} />
       <DetailTabs
         onBack={onBack}

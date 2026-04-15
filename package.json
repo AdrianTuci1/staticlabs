@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@firecms/neat": "^0.8.0",
     "@vitejs/plugin-react": "latest",
     "clsx": "latest",
     "lucide-react": "^1.8.0",

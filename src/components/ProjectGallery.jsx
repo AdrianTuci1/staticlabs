@@ -1,6 +1,10 @@
 import { LabMarkLogo } from './LabMarkLogo.jsx';
 import { AnnouncementTicker } from './AnnouncementTicker.jsx';
 import { useEffect, useRef, useState } from 'react';
+import { StripeAnimation } from './StripeAnimation.jsx';
+import { RippleAnimation } from './RippleAnimation.jsx';
+import { DNAAnimation } from './DNAAnimation.jsx';
+import { MissionView } from './MissionView.jsx';
 import './ProjectGallery.css';
 
 const SCRAMBLE_CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/#%<>[]{}';
@@ -15,7 +19,20 @@ function scrambleText(text) {
   }).join('');
 }
 
-function ProjectCard({ project, onOpen }) {
+function ProjectCardAnimation({ projectId, responsiveToScroll = false }) {
+  switch (projectId) {
+    case '001':
+      return <StripeAnimation responsiveToScroll={responsiveToScroll} />;
+    case '002':
+      return <RippleAnimation responsiveToScroll={responsiveToScroll} />;
+    case '003':
+      return <DNAAnimation responsiveToScroll={responsiveToScroll} scale={0.6} yOffset={-0.15} />;
+    default:
+      return null;
+  }
+}
+
+function ProjectCard({ project, index, onOpen, isExiting, baseDelay = 0 }) {
   const [label, setLabel] = useState(project.title);
   const intervalRef = useRef(null);
   const timeoutRef = useRef(null);
@@ -48,7 +65,11 @@ function ProjectCard({ project, onOpen }) {
 
   return (
     <button
-      className={`project-card project-card--${project.accent}`}
+      className={`project-card project-card--${project.accent} ${isExiting ? 'is-exiting' : ''}`}
+      style={{
+        '--project-card-reveal-delay': `${baseDelay + (index * 140)}ms`,
+        '--project-card-exit-delay': `${index * 80}ms`
+      }}
       type="button"
       onClick={() => onOpen(project.id)}
       onFocus={glitchTitle}
@@ -58,19 +79,26 @@ function ProjectCard({ project, onOpen }) {
         {project.id} // {project.code}
       </span>
       <span className="project-card__media" aria-hidden="true">
-        <span className="project-card__target" />
+        <ProjectCardAnimation projectId={project.id} />
+        <span className="project-card__target">
+          <span className="project-card__target-inner" />
+        </span>
       </span>
       <span className="project-card__title">{label}</span>
     </button>
   );
 }
 
-function MissionButton() {
+function MissionButton({ isActive, onClick }) {
   const buttonRef = useRef(null);
   const [direction, setDirection] = useState('');
-  const [label, setLabel] = useState('our mission');
+  const [label, setLabel] = useState(isActive ? 'FILES' : 'our mission');
   const intervalRef = useRef(null);
   const timeoutRef = useRef(null);
+
+  useEffect(() => {
+    setLabel(isActive ? 'FILES' : 'our mission');
+  }, [isActive]);
 
   useEffect(() => {
     return () => {
@@ -83,14 +111,15 @@ function MissionButton() {
     window.clearInterval(intervalRef.current);
     window.clearTimeout(timeoutRef.current);
 
-    setLabel(scrambleText('our mission'));
+    const targetText = isActive ? 'FILES' : 'our mission';
+    setLabel(scrambleText(targetText));
     intervalRef.current = window.setInterval(() => {
-      setLabel(scrambleText('our mission'));
+      setLabel(scrambleText(targetText));
     }, 55);
 
     timeoutRef.current = window.setTimeout(() => {
       window.clearInterval(intervalRef.current);
-      setLabel('our mission');
+      setLabel(targetText);
     }, 420);
   }
 
@@ -132,6 +161,7 @@ function MissionButton() {
       type="button"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      onClick={onClick}
     >
       {label}
     </button>
@@ -139,7 +169,11 @@ function MissionButton() {
 }
 
 export function ProjectGallery({ projects, onOpen }) {
+  const [isMissionActive, setIsMissionActive] = useState(false);
+  const [isGlitching, setIsGlitching] = useState(false);
   const [currentTime, setCurrentTime] = useState(new Date());
+  const [railGlitchText, setRailGlitchText] = useState({ label: '', time: '' });
+  const railIntervalRef = useRef(null);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -155,6 +189,31 @@ export function ProjectGallery({ projects, onOpen }) {
     hour12: false,
     timeZone: 'Europe/Bucharest',
   });
+
+  const getRailLabel = () => isMissionActive ? 'MISSION' : 'access files';
+  const getRailTime = () => `${formattedTime} BUCHAREST, ROMANIA`;
+
+  function toggleMission() {
+    setIsGlitching(true);
+    const nextMissionActive = !isMissionActive;
+    setIsMissionActive(nextMissionActive);
+
+    const targetLabel = nextMissionActive ? 'MISSION' : 'access files';
+    const targetTime = getRailTime();
+
+    window.clearInterval(railIntervalRef.current);
+    railIntervalRef.current = window.setInterval(() => {
+      setRailGlitchText({
+        label: scrambleText(targetLabel),
+        time: scrambleText(targetTime)
+      });
+    }, 55);
+
+    setTimeout(() => {
+      window.clearInterval(railIntervalRef.current);
+      setIsGlitching(false);
+    }, 640);
+  }
 
   const [isCursorVisible, setIsCursorVisible] = useState(false);
   const galleryRef = useRef(null);
@@ -190,7 +249,7 @@ export function ProjectGallery({ projects, onOpen }) {
   return (
     <section
       ref={galleryRef}
-      className="project-gallery"
+      className={`project-gallery ${isMissionActive ? 'is-mission-active' : ''}`}
       aria-label="Project archive"
       onPointerEnter={handlePointerEnter}
       onPointerLeave={() => setIsCursorVisible(false)}
@@ -208,25 +267,38 @@ export function ProjectGallery({ projects, onOpen }) {
           </div>
           <span>sound off</span>
         </div>
-        <AnnouncementTicker />
+        {/* <AnnouncementTicker /> */}
+        <a href="mailto:hello@staticlabs.ro" className="project-gallery__email">
+          hello@staticlabs.ro
+        </a>
       </header>
 
       <div className="project-gallery__rail">
-        <span>access files</span>
-        <span>{formattedTime} BUCHAREST, ROMANIA</span>
+        <span className={isGlitching ? 'glitch-rail' : ''}>
+          {isGlitching ? railGlitchText.label : (isMissionActive ? 'MISSION' : 'access files')}
+        </span>
+        <span className={isGlitching ? 'glitch-rail' : ''}>
+          {isGlitching ? railGlitchText.time : getRailTime()}
+        </span>
       </div>
 
+      <MissionView active={isMissionActive} />
+
       <div className="project-cards">
-        {projects.map((project) => (
-          <ProjectCard key={project.id} project={project} onOpen={onOpen} />
+        {projects.map((project, index) => (
+          <ProjectCard
+            key={`${project.id}-${isMissionActive ? 'm' : 'g'}`}
+            project={project}
+            index={index}
+            onOpen={onOpen}
+            isExiting={isMissionActive}
+            baseDelay={isMissionActive ? 0 : 800}
+          />
         ))}
       </div>
 
       <div className="project-gallery__contact">
-        <MissionButton />
-        <a href="mailto:hello@staticlabs.ro" className="project-gallery__email">
-          hello@staticlabs.ro
-        </a>
+        <MissionButton isActive={isMissionActive} onClick={toggleMission} />
       </div>
     </section>
   );
