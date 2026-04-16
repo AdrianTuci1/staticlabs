@@ -95,5 +95,8 @@
 @media (max-width: 640px) {
   .lab-mark--large {
     --lab-mark-text-size-l: 1.62rem;
+    --lab-mark-logo-size-l: 3rem;
+    --lab-mark-gap-l: 0.5rem;
+    --lab-mark-padding-l: 0.35rem 0.5rem 0.35rem 0.35rem;
   }
 }

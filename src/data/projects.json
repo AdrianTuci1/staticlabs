@@ -107,6 +107,12 @@
           { "from": "lab", "text": "Pixtooth should feel fast, tactile, precise." },
           { "from": "visitor", "text": "Keep the taxonomy visible while browsing." }
         ]
+      },
+      {
+        "id": "timeline",
+        "label": "timeline",
+        "type": "timeline",
+        "shortText": "Pixtooth development timeline."
       }
     ]
   }

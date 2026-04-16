@@ -25,6 +25,8 @@ function ProjectCardAnimation({ projectId, accent }) {
 function ProjectCard({ project, index, onOpen, isExiting, baseDelay = 0 }) {
   const { playHover, playClick } = useSoundEffects();
   const [label, setLabel] = useState(project.title);
+  const [isInView, setIsInView] = useState(false);
+  const cardRef = useRef(null);
   const intervalRef = useRef(null);
   const timeoutRef = useRef(null);
 
@@ -33,7 +35,20 @@ function ProjectCard({ project, index, onOpen, isExiting, baseDelay = 0 }) {
   }, [project.title]);
 
   useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        setIsInView(entry.isIntersecting);
+      });
+    }, {
+      threshold: 0.6
+    });
+
+    if (cardRef.current) {
+      observer.observe(cardRef.current);
+    }
+
     return () => {
+      observer.disconnect();
       window.clearInterval(intervalRef.current);
       window.clearTimeout(timeoutRef.current);
     };
@@ -56,7 +71,8 @@ function ProjectCard({ project, index, onOpen, isExiting, baseDelay = 0 }) {
 
   return (
     <button
-      className={`project-card project-card--${project.accent} ${isExiting ? 'is-exiting' : ''}`}
+      ref={cardRef}
+      className={`project-card project-card--${project.accent} ${isExiting ? 'is-exiting' : ''} ${isInView ? 'is-in-view' : ''}`}
       style={{
         '--project-card-reveal-delay': `${baseDelay + (index * 140)}ms`,
         '--project-card-exit-delay': `${index * 80}ms`
@@ -112,7 +128,6 @@ export function ProjectGallery({ projects, onOpen }) {
     timeZone: 'Europe/Bucharest',
   });
 
-  const getRailLabel = () => isMissionActive ? 'MISSION' : 'access files';
   const getRailTime = () => `${formattedTime} BUCHAREST, ROMANIA`;
 
   function toggleMission() {
@@ -177,6 +192,7 @@ export function ProjectGallery({ projects, onOpen }) {
       onPointerLeave={() => setIsCursorVisible(false)}
       onPointerMove={handlePointerMove}
     >
+      <h1 className="visually-hidden">Static Labs | AI Research Lab - Cercetare AI & Machine Learning</h1>
       <span className={`project-gallery__cursor ${isCursorVisible ? 'is-visible' : ''}`} aria-hidden="true" />
       <ProjectTopbar
         className="archive-header"
@@ -219,7 +235,7 @@ export function ProjectGallery({ projects, onOpen }) {
 
       <div className="project-gallery__contact">
         <GlitchButton
-          text={isMissionActive ? 'FILES' : 'our mission'}
+          text={isMissionActive ? 'BACK TO ARCHIVE' : 'our mission'}
           onClick={toggleMission}
         />
       </div>

@@ -1,0 +1,95 @@
+.pix-project {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  padding: 1.25rem;
+  color: #f7f7f8;
+  background: #070808;
+  overflow: hidden;
+  pointer-events: none;
+  user-select: none;
+}
+
+.pix-project--presentation,
+.pix-project--timeline {
+  display: grid !important;
+  place-items: center;
+  height: 100%;
+  min-height: 0;
+  padding: 0 !important;
+  pointer-events: auto;
+  user-select: text;
+}
+
+.pix-project__presentation-shell,
+.pix-project__timeline-shell {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.pix-project__visualizer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  background: #050505;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pix-project__camera {
+  width: 100%;
+  height: max-content;
+  display: flex;
+  flex-direction: column;
+  will-change: transform;
+  animation: pix-camera-scan 24s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+
+.pix-project__image-container {
+  flex: none;
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.pix-project__image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border: 1px solid rgba(255, 120, 40, 0.2);
+  box-shadow: 0 0 40px rgba(255, 120, 40, 0.05);
+  transition: transform 0.3s ease;
+}
+
+@keyframes pix-camera-scan {
+  0%, 100% {
+    transform: translateY(0); /* Center (pix2) */
+  }
+  33% {
+    transform: translateY(33.333%); /* Top (pix1) */
+  }
+  66% {
+    transform: translateY(-33.333%); /* Down (pix3) */
+  }
+}
+
+@media (max-width: 920px) {
+  .pix-project {
+    padding: 0.85rem;
+  }
+  
+  .pix-project__image-container {
+    padding: 1rem;
+  }
+}

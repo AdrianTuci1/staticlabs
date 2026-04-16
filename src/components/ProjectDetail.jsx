@@ -3,6 +3,7 @@ import { ProjectTopbar } from './ProjectTopbar.jsx';
 import { ProjectFeedback } from './ProjectFeedback.jsx';
 import { ThunderProject } from './ThunderProject.jsx';
 import { ParrotProject } from './ParrotProject.jsx';
+import { PixProject } from './PixProject.jsx';
 import { MarkdownContent } from './MarkdownContent.jsx';
 import { ProjectMedia } from './ProjectMedia.jsx';
 import { useSoundEffects } from '../context/SoundContext.jsx';
@@ -145,6 +146,10 @@ function ProjectStageContent({ menu, project }) {
     return <ParrotProject view={menu.id} />;
   }
 
+  if (project.title === 'Pixtooth') {
+    return <PixProject view={menu.id} />;
+  }
+
   return <ProjectVisualizer menu={menu} project={project} />;
 }
 
@@ -284,7 +289,9 @@ function DetailStage({ activeMenu, project }) {
 }
 
 export function ProjectDetail({ project, projects, onBack, onSelectProject }) {
-  const projectMenus = project.menus ?? [];
+  const projectMenus = (project.menus ?? []).filter(menu => {
+    return !(import.meta.env.VITE_DISABLE_FEEDBACK === 'true' && menu.id === 'feedback');
+  });
   const [activeMenuIndex, setActiveMenuIndex] = useState(0);
   const [isCursorVisible, setIsCursorVisible] = useState(false);
   const detailRef = useRef(null);

@@ -15,10 +15,12 @@ export function GlitchButton({ text, onClick, className = '' }) {
   const buttonRef = useRef(null);
   const [direction, setDirection] = useState('');
   const [renderedText, setRenderedText] = useState(text);
+  const textRef = useRef(text);
   const intervalRef = useRef(null);
   const timeoutRef = useRef(null);
 
   useEffect(() => {
+    textRef.current = text;
     setRenderedText(text);
   }, [text]);
 
@@ -33,14 +35,14 @@ export function GlitchButton({ text, onClick, className = '' }) {
     window.clearInterval(intervalRef.current);
     window.clearTimeout(timeoutRef.current);
 
-    setRenderedText(scrambleText(text));
+    setRenderedText(scrambleText(textRef.current));
     intervalRef.current = window.setInterval(() => {
-      setRenderedText(scrambleText(text));
+      setRenderedText(scrambleText(textRef.current));
     }, 55);
 
     timeoutRef.current = window.setTimeout(() => {
       window.clearInterval(intervalRef.current);
-      setRenderedText(text);
+      setRenderedText(textRef.current);
     }, 420);
   }
 

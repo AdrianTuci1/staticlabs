@@ -1,18 +1,20 @@
 .mission-view {
   grid-row: 3;
   grid-column: 1 / -1;
-  width: min(42rem, 100%);
+  width: min(60rem, 100%);
   margin-inline: auto;
   min-height: 0;
   display: flex;
   justify-content: center;
   align-items: stretch;
-  padding: 1.2rem 0;
+  padding: 1.2rem 0 3.2rem;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0s, 
-              transform 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0s;
-  transform: translateY(1.4rem);
+  transition: opacity 0.8s cubic-bezier(0.7, 0, 1, 1) 0s,
+    transform 0.8s cubic-bezier(0.7, 0, 1, 1) 0s,
+    clip-path 0.8s cubic-bezier(0.7, 0, 1, 1) 0s;
+  transform: translateY(-2.4rem);
+  clip-path: inset(0 0 100% 0);
   z-index: 5;
 }
 
@@ -20,17 +22,18 @@
   opacity: 1;
   pointer-events: auto;
   transform: translateY(0);
-  transition-delay: 1.2s;
+  clip-path: inset(0 0 0 0);
+  transition-delay: 1s;
 }
 
 .mission-view__container {
   width: 100%;
   max-height: 100%;
   overflow-y: auto;
-  padding: 1.5rem 0 10rem;
-  background: transparent;
-  border: none;
-  box-shadow: none;
+  padding: 2.5rem 3.5rem 7rem;
+  background: rgba(100, 220, 255, 0.05); /* Match unselected cards */
+  border: 1px solid var(--line-soft);
+  backdrop-filter: blur(2px); /* Match unselected cards */
 }
 
 /* Custom scrollbar for mission view */
@@ -49,10 +52,13 @@
 
 @media (max-width: 640px) {
   .mission-view {
-    padding: 0.5rem;
+    padding: 0.5rem 0.5rem 4rem 0.5rem; /* Raise bottom by >50px */
+    width: 100%;
   }
-  
+
   .mission-view__container {
     padding: 1.5rem;
+    border-left: none;
+    border-right: none;
   }
 }

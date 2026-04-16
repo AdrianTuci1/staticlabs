@@ -19,7 +19,7 @@
 
 .thunder-project__presentation-shell,
 .thunder-project__timeline-shell {
-  width: min(100%, 54rem);
+  width: 100%;
 }
 
 .thunder-project__eyebrow {

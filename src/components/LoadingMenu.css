@@ -203,7 +203,31 @@
   .loading-menu__console {
     margin-top: 0;
   }
+  
+  .loading-menu .loading-menu__kicker {
+    font-size: 0.85rem !important;
+    line-height: 1.4;
+    flex-wrap: wrap;
+  }
+
+  .loading-menu__status {
+    font-size: 0.85rem !important;
+  }
+
+  .loading-menu__status-icon {
+    height: 1.25rem;
+  }
+
+  .loading-menu__bar {
+    height: 2rem;
+    margin-top: 1rem;
+  }
+
+  .loading-menu .lab-mark {
+    margin-top: -1rem;
+  }
 }
+
 
 @keyframes load-archive {
   0% {

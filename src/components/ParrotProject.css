@@ -21,7 +21,7 @@
 
 .parrot-project__presentation-shell,
 .parrot-project__timeline-shell {
-  width: min(100%, 54rem);
+  width: 100%;
 }
 
 .parrot-project__eyebrow {

@@ -16,14 +16,12 @@
   --panel: rgba(18, 20, 20, 0.84);
   --panel-hot: rgba(255, 91, 88, 0.12);
   --shadow-cyan: 0 0 18px rgba(100, 220, 255, 0.24);
-  --mission-gradient: linear-gradient(
-    45deg,
-    #ffff00 0%,
-    #ff7f00 25%,
-    #ff0000 50%,
-    #8f00ff 75%,
-    #0000ff 100%
-  );
+  --mission-gradient: linear-gradient(90deg,
+      #ffbf00 0%,
+      #ff7f00 25%,
+      #ff0000 50%,
+      #8f00ff 75%,
+      #0000ff 100%);
   font-family: "IBM Plex Mono", "Roboto Mono", "Courier New", monospace;
   font-synthesis: none;
   text-rendering: geometricPrecision;

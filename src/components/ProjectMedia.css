@@ -54,6 +54,7 @@
 .project-media--id-001 .project-media__video {
   filter: grayscale(1) brightness(1.8) contrast(1.1);
   mix-blend-mode: screen;
+  opacity: 0.5;
 }
 
 .project-media--id-001 .project-media__video-tint {
@@ -75,7 +76,9 @@
   pointer-events: none;
 }
 
-.project-media:hover .project-media__video-container {
+.project-card:hover .project-media__video-container,
+.project-card:focus-visible .project-media__video-container,
+.project-card.is-in-view .project-media__video-container {
   opacity: 1 !important;
   transform: translate(-50%, calc(-50% + var(--media-y))) scale(calc(var(--media-zoom) + 0.05));
 }

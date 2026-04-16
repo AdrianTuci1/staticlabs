@@ -21,26 +21,26 @@ const THUNDER_TIMELINE_ITEMS = [
     Icon: Gauge,
   },
   {
-    id: 'distillation',
-    marker: '02',
-    title: 'Distillation',
-    description:
-      'Transfer useful teacher behavior into the small model: sharper summaries, cleaner formatting, fewer dead ends, and stronger responses under tight latency.',
-    timestamp: 'Phase 02',
-    status: 'completed',
-    metric: 'Output: small model, stronger taste',
-    Icon: Repeat2,
-  },
-  {
     id: 'sft',
-    marker: '03',
+    marker: '02',
     title: 'SFT',
     description:
       'Teach the assistant the product contract: answer directly, keep structure stable, write usable code, and avoid drifting away from the user request.',
-    timestamp: 'Phase 03',
+    timestamp: 'Phase 02',
     status: 'completed',
     metric: 'Output: instruction-following loop',
     Icon: ListChecks,
+  },
+  {
+    id: 'distillation',
+    marker: '03',
+    title: 'Distillation',
+    description:
+      'Distill the model to predict responses in fewer steps, significantly reducing latency while maintaining quality and accuracy.',
+    timestamp: 'Phase 03',
+    status: 'completed',
+    metric: 'Output: faster inference, fewer steps',
+    Icon: Repeat2,
   },
   {
     id: 'dpo',
@@ -65,30 +65,19 @@ const THUNDER_TIMELINE_ITEMS = [
     Icon: Rocket,
   },
   {
-    id: 'web-search',
-    marker: '06',
-    title: 'Web search capabilities',
-    description:
-      'Add retrieval for current information, source-aware answers, and freshness checks so Thunder can handle questions that depend on live context.',
-    timestamp: 'Phase 06',
-    status: 'active',
-    metric: 'Focus: current, cited answers',
-    Icon: Rocket,
-  },
-  {
     id: 'scale-up',
-    marker: '07',
+    marker: '06',
     title: 'Scale up to 4B',
     description:
       'Grow the system to 4B parameters and make it meaningfully multilingual, while preserving the compact answer style and deployment discipline.',
     timestamp: 'Next',
-    status: 'pending',
+    status: 'active',
     metric: 'Goal: multilingual 4B model',
-    Icon: Rocket,
+    Icon: Repeat2,
   },
   {
     id: 'tool-use-reasoning',
-    marker: '08',
+    marker: '07',
     title: 'Tool use and reasoning',
     description:
       'Teach Thunder to choose tools, verify intermediate steps, and expose enough reasoning structure for reliable workflows without overexplaining.',
@@ -179,6 +168,64 @@ export const STATSPARROT_TIMELINE_ITEMS = [
   },
 ];
 
+export const PIXTOOTH_TIMELINE_ITEMS = [
+  {
+    id: 'data-foundation',
+    marker: '01',
+    title: 'Multi-modal data foundation',
+    description:
+      'Established high-fidelity ingestion for diverse dental datasets, including radiographs, intraoral scans, and clinical notes, ensuring rigorous normalization for model training.',
+    timestamp: 'Phase 01',
+    status: 'completed',
+    metric: 'Output: normalized clinical repository',
+    Icon: Gauge,
+  },
+  {
+    id: 'model-training',
+    marker: '02',
+    title: 'Model pre-training',
+    description:
+      'Trained specialized vision-language models on 1000-2000 annotated images to recognize anatomical structures, restorations, and pathology with clinical precision.',
+    timestamp: 'Phase 02',
+    status: 'completed',
+    metric: 'Output: base auto-charting model',
+    Icon: Repeat2,
+  },
+  {
+    id: 'precision-interface',
+    marker: '03',
+    title: 'Tactile precision interface',
+    description:
+      'Interface is established; currently connecting model-driven observations to the UI and refining tooth segmentation masks.',
+    timestamp: 'In progress',
+    status: 'active',
+    metric: 'Focus: observation linking & mask tuning',
+    Icon: Check,
+  },
+  {
+    id: 'feedback-loop',
+    marker: '04',
+    title: 'Clinician feedback loop',
+    description:
+      'Integrated real-time active learning where clinician corrections directly refine the model, tightening the loop between documentation and diagnostic insight.',
+    timestamp: 'Phase 04',
+    status: 'pending',
+    metric: 'Focus: real-time model alignment',
+    Icon: Rocket,
+  },
+  {
+    id: 'production-rollout',
+    marker: '05',
+    title: 'Production rollout',
+    description:
+      'Deploying Pixtooth as a live workstation assistant with full audit trails, HIPAA-compliant encryption, and seamless practice management system integration.',
+    timestamp: 'Next',
+    status: 'pending',
+    metric: 'Goal: clinical-grade deployment',
+    Icon: Rocket,
+  },
+];
+
 export function ProjectTimeline({ items = THUNDER_TIMELINE_ITEMS }) {
   const currentItemRef = useRef(null);
   const currentItemId = useMemo(() => {
@@ -191,10 +238,11 @@ export function ProjectTimeline({ items = THUNDER_TIMELINE_ITEMS }) {
   useEffect(() => {
     const timeout = window.setTimeout(() => {
       currentItemRef.current?.scrollIntoView({
+        behavior: 'smooth',
         block: 'center',
         inline: 'nearest',
       });
-    }, 80);
+    }, 800);
 
     return () => window.clearTimeout(timeout);
   }, [currentItemId]);
