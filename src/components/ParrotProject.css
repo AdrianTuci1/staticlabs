@@ -4,7 +4,7 @@
   height: 100%;
   min-height: 0;
   color: #f7f7f8;
-  background: #090a0b;
+  background: #070808;
   overflow: hidden;
 }
 
@@ -99,7 +99,6 @@
 .parrot-project__visualizer-container {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 50% 50%, #150a0a 0%, #090a0b 100%);
 }
 
 .parrot-project__visualizer-container::before {

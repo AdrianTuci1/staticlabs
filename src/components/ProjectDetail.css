@@ -98,6 +98,9 @@
 
 .detail-topbar {
   z-index: 10;
+  filter: saturate(0.6) brightness(0.9);
+  opacity: 0.92;
+  transition: filter 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 
@@ -380,7 +383,7 @@
   min-height: 0;
   border: 1px solid color-mix(in srgb, var(--project-theme) 58%, transparent);
   border-left: 0;
-  background: rgba(18, 20, 20, 0.52);
+  background: #070808;
   overflow: hidden;
 }
 

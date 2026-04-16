@@ -7,9 +7,15 @@ import { MarkdownContent } from './MarkdownContent.jsx';
 import { ProjectMedia } from './ProjectMedia.jsx';
 import { useSoundEffects } from '../context/SoundContext.jsx';
 import { GlitchButton } from './GlitchButton.jsx';
+import { projectMarkdown } from '../data/projectMarkdown.js';
 import './ProjectDetail.css';
 
 const CRYSTAL_CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789#$)@$*@!)#$%^*)%_+#$^&[]{}<>/\\|~=-+;:,.?';
+const PROJECT_LIVE_URLS = {
+  '001': import.meta.env.VITE_THUNDER_LIVE_URL,
+  '002': import.meta.env.VITE_STATSPARROT_LIVE_URL,
+  '003': import.meta.env.VITE_PIXTOOTH_LIVE_URL,
+};
 
 function scrambleText(text, revealRatio = 0) {
   const revealIndex = Math.floor(text.length * revealRatio);
@@ -122,9 +128,11 @@ function ProjectStageContent({ menu, project }) {
   }
 
   if (menu.type === 'mermaid') {
+    const content = projectMarkdown[menu.markdownId] ?? menu.mermaid;
+
     return (
       <div className="mermaid-text" aria-label="Markdown presentation text">
-        <MarkdownContent content={menu.mermaid} />
+        <MarkdownContent content={content} />
       </div>
     );
   }
@@ -217,6 +225,15 @@ function DetailTabs({ onBack, onNext, onPrevious }) {
 
 function DetailSidebar({ activeMenuIndex, project, projectMenus, onSelectMenu }) {
   const { playClick, playHover } = useSoundEffects();
+  const liveUrl = PROJECT_LIVE_URLS[project.id];
+
+  function openLiveProject() {
+    if (!liveUrl) {
+      return;
+    }
+
+    window.open(liveUrl, '_blank', 'noopener,noreferrer');
+  }
 
   return (
     <aside className="detail-sidebar" aria-label="Project menu">
@@ -249,7 +266,7 @@ function DetailSidebar({ activeMenuIndex, project, projectMenus, onSelectMenu })
       <div className="detail-sidebar__actions">
         <GlitchButton
           text="see project live"
-          onClick={() => {}}
+          onClick={openLiveProject}
         />
       </div>
     </aside>

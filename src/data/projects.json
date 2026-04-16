@@ -6,7 +6,7 @@
     "status": "active",
     "accent": "blue",
     "image": "/static-labs-signal.svg",
-    "description": "Ultra-fast diffusion language model built for instant answers, sharp reasoning, and low-latency product workflows.",
+    "description": "Diffusion-based language model for low-latency conversation, short code completion, and fluid human-machine interaction.",
     "menus": [
       {
         "id": "visualize",
@@ -19,7 +19,7 @@
         "id": "presentation",
         "label": "presentation",
         "type": "mermaid",
-        "mermaid": "# Technical Report: Thunder - Diffusion-based dLLM Framework\n## Parallel Continuous Diffusion for High-Throughput Inference\n\n### Abstract\nThe Thunder framework introduces an architectural alternative to conventional autoregressive generation by implementing **Parallel Continuous Diffusion (PCD)**. Our research demonstrates that by bypassing the sequential decoding bottleneck, iterative denoising processes can enable simultaneous refinement of large text blocks, achieving throughput levels previously unattainable for models in the 1B-2B parameter range.\n\n### 1. Sequential Bottleneck Decoupling\nConventional LLM inference relies on token-by-token generation (O(n)), where each step is constrained by the latency of the previous token. Thunder treats the target output space as a fixed-size multidimensional canvas. The model performs global refinement passes across the entire canvas simultaneously, utilizing a continuous latent space to arrive at coherent linguistic structures in a fraction of the time required by sequential decoders.\n\n### 2. Dynamic Canvas and Context Pipeline\nTo manage varying prompt complexities, we implemented a 2048-token context-aware pipeline. The **Dynamic Canvas** system monitors structural entropy during the generation process, dynamically reallocating VRAM and computational cycles to high-complexity segments of the response while bypassing low-entropy regions. This ensures optimal resource density throughout the inference cycle.\n\n### 3. Cuda/Triton Kernel Optimization\nExperimental results on A100 clusters were achieved through the development of specialized execution kernels. These kernels are hard-coded to optimize the iterative refinement loops of the diffusion process, resulting in **5x higher inference speeds** compared to baseline autoregressive models while maintaining competitive semantic precision and structural coherence.\n\n### 4. Preliminary Results\nInternal benchmarks indicate that Thunder (approx. 1B params) achieves reasoning density comparable to 500M-700M autoregressive models, with a significant advantage in batch processing and low-latency interaction scenarios.\n\n[staticlabs.ro](https://staticlabs.ro)"
+        "markdownId": "thunder"
       },
       {
         "id": "feedback",
@@ -45,7 +45,7 @@
     "status": "calibrating",
     "accent": "purple",
     "image": "/static-labs-signal.svg",
-    "description": "Sports intelligence workspace for tracking signals, comparing model reads, and turning match data into faster decisions.",
+    "description": "Autonomous no-ETL data engineering system that connects sources, produces insights, and recommends operational decisions.",
     "menus": [
       {
         "id": "visualize",
@@ -58,7 +58,7 @@
         "id": "presentation",
         "label": "presentation",
         "type": "mermaid",
-        "mermaid": "# System Architecture: Statsparrot Autonomous Analytics\n## Zero ETL Data Projections and Coordinator Agent Orchestration\n\n### Executive Summary\nStatsparrot represents a paradigm shift in data engineering by introducing an **Autonomous Data Layer**. By abstracting the complexities of traditional ETL (Extract, Transform, Load) processes, the system enables an orchestrated environment where coordinator agents manage real-time data projections and infrastructure scaling without manual intervention.\n\n### 1. Zero ETL & Real-Time Projections\nTraditional data pipelines are often brittle and latent. Statsparrot employs a **Zero ETL architecture**, creating direct, synchronized projections between disparate data sources and analytics engines. This eliminates the staging layer entirely, allowing for millisecond-latency updates across multi-client production environments while maintaining strict projection integrity.\n\n### 2. Coordinator Agent Orchestration\nThe system's intelligence resides in its network of **coordinator agents**. These specialized models are trained to oversee the health and topology of data workflows. They proactively identify bottlenecks, resolve schema drift, and optimize data routing paths, ensuring that the system remains resilient even under volatile load conditions.\n\n### 3. Predictive Infrastructure Scaling\nIntegrating a dedicated analytics engine, Statsparrot dynamically computes the computational overhead required for both active data streams and projected workflows. This predictive scaling mechanism allows for precise resource allocation on A100/H100 clusters, preventing both under-performance and resource wastage in high-stakes production deployments.\n\n### 4. Mindmap-Driven Engineering Interface\nWe have transitioned the engineering workflow from imperative coding to high-level strategic intervention. The **Mindmap Interface** allows engineers to visualize and steer the underlying graph topology of autonomous data flows, focusing on strategic intent rather than implementation details.\n\n### 5. Production Viability\nStatsparrot is currently deployed and tested with multiple enterprise clients, demonstrating a significant reduction in data engineering overhead and a marked increase in the stability of real-time analytical projections.\n\n[statsparrot.com](https://statsparrot.com)"
+        "markdownId": "statsparrot"
       },
       {
         "id": "feedback",
@@ -84,7 +84,7 @@
     "status": "draft",
     "accent": "orange",
     "image": "/static-labs-signal.svg",
-    "description": "Image prompt and asset system for exploring visual variants, organizing prompt runs, and shipping cleaner creative states.",
+    "description": "Dental charting platform with machine learning support for auto-charting and clinician-reviewed documentation.",
     "menus": [
       {
         "id": "visualize",
@@ -97,7 +97,7 @@
         "id": "presentation",
         "label": "presentation",
         "type": "mermaid",
-        "mermaid": "Pixtooth organizes visual exploration into a cleaner creative loop.\n\nThe system should make prompt runs easier to compare, preserve useful asset states, and keep the path from brief to output visible.\n\nThe presentation should emphasize speed, variant clarity, and fewer lost decisions between prompt iterations."
+        "markdownId": "pixtooth"
       },
       {
         "id": "feedback",
