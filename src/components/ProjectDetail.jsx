@@ -336,6 +336,11 @@ export function ProjectDetail({ project, projects, onBack, onSelectProject }) {
   useEffect(() => () => cancelAnimationFrame(cursorFrameRef.current), []);
 
   useEffect(() => {
+    document.body.classList.add('is-project-detail');
+    return () => document.body.classList.remove('is-project-detail');
+  }, []);
+
+  useEffect(() => {
     setActiveMenuIndex(0);
   }, [project.id]);
 

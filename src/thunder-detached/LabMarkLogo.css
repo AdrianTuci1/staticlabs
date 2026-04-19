@@ -1,0 +1,23 @@
+.lab-mark__glyph {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.05rem;
+  height: 1.05rem;
+  flex-shrink: 0;
+}
+
+.lab-mark__logo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: #f7f7f8;
+  -webkit-mask-image: url('/logo.svg');
+  mask-image: url('/logo.svg');
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+}

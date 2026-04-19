@@ -1,0 +1,330 @@
+.thunder-chat-demo {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  padding: 1.25rem;
+  color: #f7f7f8;
+  background: #070808;
+  overflow: hidden;
+  /* Detached defaults */
+  --thunder-bg: #070808;
+  --thunder-composer-bg: #050505;
+  --thunder-border: #2f3437;
+  --thunder-text: #f7f7f8;
+  --thunder-accent: #2f7cff;
+}
+
+.thunder-chat-demo__messages {
+  display: grid;
+  min-height: 0;
+  overflow: auto;
+  scrollbar-color: #3f4448 transparent;
+  scrollbar-width: thin;
+}
+
+.thunder-chat-demo__messages-inner {
+  display: grid;
+  align-content: start;
+  gap: 1.25rem;
+  width: min(100%, 52rem);
+  margin-inline: auto;
+  padding-bottom: 1.15rem;
+}
+
+.thunder-chat-demo__exchange {
+  display: grid;
+  gap: 1.05rem;
+}
+
+.thunder-chat-demo__message {
+  display: grid;
+  gap: 0.65rem;
+  width: min(100%, 42rem);
+  margin: 0;
+  color: #f7f7f8;
+  font-size: 0.94rem;
+  line-height: 1.55;
+}
+
+.thunder-chat-demo__message--user {
+  justify-self: end;
+  width: min(100%, 34rem);
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--thunder-border);
+  border-radius: 8px;
+  color: #ffffff;
+  background: var(--thunder-composer-bg);
+  animation: thunder-project-send 260ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.thunder-chat-demo__message--assistant {
+  justify-self: start;
+}
+
+.thunder-chat-demo__message p {
+  margin: 0;
+}
+
+.thunder-chat-demo__role {
+  color: #a7adb4;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+.thunder-chat-demo__caret {
+  display: inline-block;
+  width: 1px;
+  height: 1em;
+  margin-left: 2px;
+  background: #ffffff;
+  vertical-align: -0.16em;
+  animation: thunder-project-caret 680ms step-end infinite;
+}
+
+.thunder-chat-demo__csv {
+  display: grid;
+  border: 1px solid #33383d;
+  border-radius: 8px;
+  background: #0b0d0e;
+  overflow: hidden;
+}
+
+.thunder-chat-demo__csv-row {
+  display: grid;
+  grid-template-columns: 1.1fr 0.85fr 1.45fr;
+}
+
+.thunder-chat-demo__csv-row+.thunder-chat-demo__csv-row {
+  border-top: 1px solid #24282c;
+}
+
+.thunder-chat-demo__csv-row:first-child {
+  color: #d7dce2;
+  background: #15181b;
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+
+.thunder-chat-demo__csv-row span {
+  min-width: 0;
+  padding: 0.62rem 0.7rem;
+  border-right: 1px solid #24282c;
+  overflow-wrap: anywhere;
+}
+
+.thunder-chat-demo__csv-row span:last-child {
+  border-right: 0;
+}
+
+.thunder-chat-demo__code {
+  margin: 0;
+  border: 1px solid #33383d;
+  border-radius: 8px;
+  background: var(--thunder-composer-bg);
+  overflow: hidden;
+}
+
+.thunder-chat-demo__code figcaption {
+  min-height: 2.2rem;
+  padding: 0.62rem 0.8rem;
+  border-bottom: 1px solid #24282c;
+  color: #cdd3da;
+  font-size: 0.72rem;
+}
+
+.thunder-chat-demo__code pre {
+  margin: 0;
+  padding: 0.9rem;
+  overflow: auto;
+  color: #ffffff;
+  font: inherit;
+  font-size: 0.82rem;
+  line-height: 1.55;
+  white-space: pre;
+}
+
+.thunder-chat-demo__composer-wrap {
+  display: grid;
+  width: min(100%, 52rem);
+  margin: 0 auto;
+}
+
+.thunder-chat-demo__composer-wrap.is-centered {
+  grid-row: 1 / -1;
+  align-self: center;
+  justify-self: center;
+  width: min(100%, 38rem);
+  gap: 1rem;
+}
+
+.thunder-chat-demo__brand {
+  display: inline-grid;
+  grid-template-columns: auto auto;
+  gap: 0.65rem;
+  align-items: center;
+  justify-self: start;
+  color: #f7f7f8;
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.thunder-chat-demo__brand-glyph {
+  width: 1.05rem;
+  height: 1.05rem;
+}
+
+.thunder-chat-demo__composer {
+  position: relative;
+  display: grid;
+  gap: 0.85rem;
+  min-height: 4.95rem;
+  padding: 0.85rem;
+  border: 1px solid var(--thunder-border);
+  border-radius: 8px;
+  color: #ffffff;
+  background: var(--thunder-composer-bg);
+  font-size: 0.9rem;
+  line-height: 1.45;
+  box-shadow: none;
+}
+
+.thunder-chat-demo__composer-wrap.is-centered .thunder-chat-demo__composer {
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.26);
+}
+
+.thunder-chat-demo__prompt {
+  display: block;
+  padding-right: 3.1rem;
+}
+
+.thunder-chat-demo__prompt>span {
+  display: block;
+  min-width: 0;
+  padding: 0.2rem 0 0 0.25rem;
+  overflow-wrap: anywhere;
+}
+
+.thunder-chat-demo__send {
+  position: absolute;
+  right: 0.85rem;
+  bottom: 0.72rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.2rem;
+  min-width: 2.2rem;
+  aspect-ratio: 1;
+  padding: 0;
+  border: 1px solid #3a4046;
+  border-radius: 8px;
+  color: #050505;
+  background: #ffffff;
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0;
+  transform: translateY(0);
+  transition: background 160ms ease, color 160ms ease, transform 160ms ease, box-shadow 160ms ease;
+}
+
+.thunder-chat-demo__composer.is-sending .thunder-chat-demo__send {
+  color: #ffffff;
+  background: var(--thunder-accent);
+  border-color: #5f9dff;
+  box-shadow: 0 0 18px rgba(47, 124, 255, 0.46);
+  transform: translateY(-0.12rem);
+}
+
+.thunder-chat-demo__composer.is-sending .thunder-chat-demo__prompt>span {
+  color: #d7dce2;
+}
+
+.thunder-chat-demo__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem 0.55rem;
+  align-items: center;
+  min-width: 0;
+  padding: 0 6.15rem 0.05rem 0.25rem;
+  color: #a7adb4;
+  font-size: 0.72rem;
+  line-height: 1.2;
+}
+
+.thunder-chat-demo__icon-button,
+.thunder-chat-demo__reasoning,
+.thunder-chat-demo__model {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  white-space: nowrap;
+}
+
+.thunder-chat-demo__icon-button,
+.thunder-chat-demo__reasoning {
+  min-height: 1.7rem;
+  border: 1px solid var(--thunder-border);
+  border-radius: 8px;
+  background: #0b0d0e;
+}
+
+.thunder-chat-demo__icon-button {
+  width: 1.85rem;
+}
+
+.thunder-chat-demo__reasoning {
+  gap: 0.34rem;
+  padding: 0 0.55rem;
+  color: #d7dce2;
+}
+
+.thunder-chat-demo__model {
+  position: absolute;
+  right: 3.55rem;
+  bottom: 1.15rem;
+  color: #a7adb4;
+}
+
+@keyframes thunder-project-caret {
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes thunder-project-send {
+  from {
+    opacity: 0;
+    transform: translateY(3.2rem) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (max-width: 920px) {
+  .thunder-chat-demo {
+    min-height: 18rem;
+    padding: 0.85rem;
+  }
+
+  .thunder-chat-demo__csv-row {
+    grid-template-columns: 1fr;
+  }
+
+  .thunder-chat-demo__csv-row span {
+    border-right: 0;
+  }
+
+  .thunder-chat-demo__csv-row span+span {
+    border-top: 1px solid #24282c;
+  }
+}

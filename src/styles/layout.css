@@ -52,5 +52,30 @@ main {
   .app-shell {
     --frame-inset: 0.45rem;
     padding: 0.7rem;
+    padding-bottom: calc(0.7rem + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+@media (max-width: 920px) {
+  body.is-project-detail {
+    height: auto;
+    min-height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  .app-shell--blue,
+  .app-shell--purple,
+  .app-shell--orange {
+    height: auto;
+    min-height: 100dvh;
+    overflow: visible;
+  }
+
+  .app-shell--blue main,
+  .app-shell--purple main,
+  .app-shell--orange main {
+    height: auto;
+    min-height: 100%;
   }
 }

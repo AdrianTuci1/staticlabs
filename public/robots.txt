@@ -1,4 +1,23 @@
 User-agent: *
 Allow: /
 
+# Specifically allow AI crawlers
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Claude-Bot
+Allow: /
+
+User-agent: ClaudeWeb
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
 Sitemap: https://staticlabs.ro/sitemap.xml

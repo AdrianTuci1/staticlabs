@@ -865,7 +865,11 @@
 
 @media (max-width: 920px) {
   .project-detail {
+    grid-template-rows: auto auto auto;
+    height: auto;
+    min-height: calc(100dvh - 1.4rem);
     padding: 0.5rem;
+    overflow: visible;
   }
 
   .detail-tabs {
@@ -887,14 +891,8 @@
     display: flex;
     flex-direction: column;
     gap: 0;
-    overflow-y: auto;
-    overflow-x: hidden;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-  }
-
-  .detail-workspace::-webkit-scrollbar {
-    display: none;
+    min-height: max-content;
+    overflow: visible;
   }
 
   .detail-sidebar {
@@ -953,7 +951,6 @@
     border-left: 0;
     border-top: 3px solid color-mix(in srgb, var(--project-theme) 58%, transparent);
   }
-
 
   .visualizer-placeholder,
   .project-feedback {

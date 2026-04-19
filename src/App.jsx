@@ -22,6 +22,19 @@ export default function App() {
     return () => window.clearTimeout(timer);
   }, [screen]);
 
+  // SPA Page View Tracking (GA4)
+  useEffect(() => {
+    if (window.gtag) {
+      const path = screen === 'detail' ? `/project/${selectedProject.title.toLowerCase()}` : '/';
+      const title = screen === 'detail' ? `${selectedProject.title} | Static Labs` : 'Archive | Static Labs';
+
+      window.gtag('event', 'page_view', {
+        page_path: path,
+        page_title: title
+      });
+    }
+  }, [screen, selectedId, selectedProject.title]);
+
   function openProject(projectId) {
     setSelectedId(projectId);
     setScreen('detail');

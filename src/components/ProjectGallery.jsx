@@ -69,39 +69,49 @@ function ProjectCard({ project, index, onOpen, isExiting, baseDelay = 0 }) {
     }, 420);
   }
 
+  const titleId = `project-title-${project.id}`;
+  const descId = `project-desc-${project.id}`;
+
   return (
-    <button
-      ref={cardRef}
-      className={`project-card project-card--${project.accent} ${isExiting ? 'is-exiting' : ''} ${isInView ? 'is-in-view' : ''}`}
+    <article 
+      className={`project-card-container ${isExiting ? 'is-exiting' : ''} ${isInView ? 'is-in-view' : ''}`}
       style={{
         '--project-card-reveal-delay': `${baseDelay + (index * 140)}ms`,
         '--project-card-exit-delay': `${index * 80}ms`
       }}
-      type="button"
-      onClick={() => {
-        playClick();
-        onOpen(project.id);
-      }}
-      onFocus={() => {
-        playHover();
-        glitchTitle();
-      }}
-      onMouseEnter={() => {
-        playHover();
-        glitchTitle();
-      }}
     >
-      <span className="project-card__code">
-        {project.id} // {project.code}
-      </span>
-      <span className="project-card__media" aria-hidden="true">
-        <ProjectCardAnimation projectId={project.id} accent={project.accent} />
-        <span className="project-card__target">
-          <span className="project-card__target-inner" />
+      <button
+        ref={cardRef}
+        className={`project-card project-card--${project.accent}`}
+        type="button"
+        aria-labelledby={titleId}
+        aria-describedby={descId}
+        onClick={() => {
+          playClick();
+          onOpen(project.id);
+        }}
+        onFocus={() => {
+          playHover();
+          glitchTitle();
+        }}
+        onMouseEnter={() => {
+          playHover();
+          glitchTitle();
+        }}
+      >
+        <span className="project-card__code">
+          {project.id} // {project.code}
         </span>
-      </span>
-      <span className="project-card__title">{label}</span>
-    </button>
+        <span className="project-card__media" aria-hidden="true">
+          <ProjectCardAnimation projectId={project.id} accent={project.accent} />
+          <span className="project-card__target">
+            <span className="project-card__target-inner" />
+          </span>
+        </span>
+        <h2 id={titleId} className="project-card__title">{label}</h2>
+        <span id={descId} className="visually-hidden">{project.description}</span>
+      </button>
+    </article>
   );
 }
 
