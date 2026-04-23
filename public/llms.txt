@@ -1,0 +1,23 @@
+# Static Labs
+
+AI and Machine Learning Research Laboratory specialized in **Human-Computer Interaction (HCI)** and workflow-native intelligence. Static Labs focuses on making AI easier to understand, control, and use in complex professional environments.
+
+## Core Projects
+
+- **Thunder**: A diffusion-based language model designed for low-latency conversation, short code completion, and fluid Human-Computer Interaction (HCI). It prioritizes immediate response without sacrificing quality.
+- **Statsparrot**: An autonomous no-ETL data engineering system. It connects data sources, produces automated insights, and recommends operational decisions through confidence bands and signal maps.
+- **Pixtooth**: A specialized dental charting platform powered by machine learning. It supports auto-charting and clinician-reviewed documentation, focusing on precision and speed in medical diagnostics.
+
+## Mission & Philosophy
+
+- **Human-Computer Interaction (HCI)**: Moving from intention to outcome with minimal friction.
+- **Human Control by Design**: Keeping expertise, review, and responsibility visible in AI workflows.
+- **Visible Reasoning**: AI systems should expose how they reached results, avoiding the "black box" problem.
+- **Practical Prototyping**: Building working systems to test research in real-world professional environments.
+
+## Technical Context
+
+- **Location**: Based in Bucharest, Romania.
+- **Expertise**: LLM Optimization, Data Engineering, Autonomous Systems, and Interface Design.
+- **Contact**: hello@staticlabs.ro
+- **Website**: https://staticlabs.ro

@@ -21,3 +21,4 @@ User-agent: CCBot
 Allow: /
 
 Sitemap: https://staticlabs.ro/sitemap.xml
+LLMS: https://staticlabs.ro/llms.txt

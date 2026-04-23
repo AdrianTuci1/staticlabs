@@ -45,8 +45,10 @@ export default function App() {
       <div className={`app-shell ${screen === 'detail' ? `app-shell--${selectedProject.accent}` : ''}`}>
         <div className="screen-noise" aria-hidden="true" />
         <main>
-          {screen === 'loading' && <LoadingMenu />}
-          {screen === 'projects' && <ProjectGallery projects={projects} onOpen={openProject} />}
+          {screen === 'loading' &&
+            <LoadingMenu />}
+          {screen === 'projects' &&
+            <ProjectGallery projects={projects} onOpen={openProject} />}
           {screen === 'detail' && (
             <ProjectDetail
               project={selectedProject}

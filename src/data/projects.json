@@ -6,7 +6,7 @@
     "status": "active",
     "accent": "blue",
     "image": "/static-labs-signal.svg",
-    "description": "Diffusion-based language model for low-latency conversation, short code completion, and fluid human-machine interaction.",
+    "description": "Diffusion-based language model for low-latency conversation, short code completion, and fluid Human-Computer Interaction (HCI).",
     "menus": [
       {
         "id": "visualize",

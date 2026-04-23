@@ -1,11 +1,11 @@
 # OUR MISSION
 
-### RESEARCH FOR BETTER HUMAN-MACHINE COLLABORATION
+### RESEARCH FOR BETTER HUMAN-COMPUTER INTERACTION (HCI)
 Static Labs is a research laboratory focused on making artificial intelligence easier to understand, easier to control, and genuinely useful in everyday work. We study how people can collaborate with intelligent systems without losing clarity, judgment, or responsibility along the way.
 
 Our direction is simple: AI should help people move from intention to outcome with less friction. That means faster tools, clearer feedback, better explanations, and systems that show how they reached a result instead of hiding the process behind a black box.
 
-We combine machine learning research, product engineering, and interface design to explore a more practical form of human-machine collaboration. The goal is not to replace expertise, but to support it: to help people notice what matters, make better decisions, and stay in control when work becomes complex.
+We combine machine learning research, product engineering, and interface design to explore a more practical form of Human-Computer Interaction (HCI). The goal is not to replace expertise, but to support it: to help people notice what matters, make better decisions, and stay in control when work becomes complex.
 
 #### RESEARCH PRINCIPLES
 1. **HUMAN CONTROL BY DESIGN**: AI should make expert work easier while keeping review, correction, and responsibility visible.
